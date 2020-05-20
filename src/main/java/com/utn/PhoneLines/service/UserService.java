@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static java.util.Objects.isNull;
-
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -17,11 +15,10 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public List<User> getAll() {
 
             return userRepository.findAll();
-
-
     }
 
 }

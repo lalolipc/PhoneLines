@@ -19,9 +19,9 @@ public class City {
     private Integer idCity;
 
     private String name;
-    private String province_name;
+    private String provinceName;
     private String prefix;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "city")
     private List<User> listUsers;
 
 

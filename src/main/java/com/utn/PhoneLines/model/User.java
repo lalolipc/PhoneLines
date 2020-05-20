@@ -23,11 +23,12 @@ public class User {
     private String lastName;
     private String dni;
     private String userType;
-    private String user_name;
+    private String userName;
     private String password;
     //cuando consultamos uno tenga estado del otro
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference//referencia para la entidad
+    @JsonBackReference(value = "user-city")//referencia para la entidad
+    @JoinColumn(name = "idCity")
     private City city;
 
 }
