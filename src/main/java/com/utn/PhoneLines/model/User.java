@@ -25,5 +25,9 @@ public class User {
     private String userType;
     private String user_name;
     private String password;
+    //cuando consultamos uno tenga estado del otro
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference//referencia para la entidad
+    private City city;
 
 }
