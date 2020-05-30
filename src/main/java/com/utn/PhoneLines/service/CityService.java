@@ -22,7 +22,8 @@ public class CityService {
     public List<City> getAll() {
 
         return cityRepository.findAll();
-
-
+    }
+    public void add(City city) {
+        cityRepository.save(city);
     }
 }
