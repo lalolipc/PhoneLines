@@ -1,41 +1,41 @@
 package com.utn.PhoneLines.controller;
 
 
-import com.utn.PhoneLines.model.User;
-import com.utn.PhoneLines.projection.UserCant;
-import com.utn.PhoneLines.service.UserService;
+import com.utn.PhoneLines.model.Customer;
+import com.utn.PhoneLines.projection.CustomerCant;
+import com.utn.PhoneLines.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/customer")
 
-public class UserController {
+public class CustomerController {
 
-    private final UserService userService;
+    private final CustomerService customerService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
 
     @GetMapping("/")
-    public List<User> getAll() {
-        return userService.getAll();
+    public List<Customer> getAll() {
+        return customerService.getAll();
     }
 
 
     @PostMapping("/")
-    public void addPet(@RequestBody final User user) {
-        userService.add(user);
+    public void addCustomer(@RequestBody final Customer customer) {
+        customerService.add(customer);
 
     }
 
     @GetMapping("/projection")
-    public List<UserCant> getUserCant() {
-        return userService.getUserCant();
+    public List<CustomerCant> getCustomerCant() {
+        return customerService.getCustomerCant();
     }
 }

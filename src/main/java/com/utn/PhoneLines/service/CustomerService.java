@@ -1,31 +1,32 @@
 package com.utn.PhoneLines.service;
 
-import com.utn.PhoneLines.model.User;
-import com.utn.PhoneLines.projection.UserCant;
-import com.utn.PhoneLines.repository.UserRepository;
+import com.utn.PhoneLines.model.Customer;
+import com.utn.PhoneLines.projection.CustomerCant;
+import com.utn.PhoneLines.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
-    private final UserRepository userRepository;
+public class CustomerService {
+    private final CustomerRepository customerRepository;
 @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
-    public List<User> getAll() {
+    public List<Customer> getAll() {
 
-            return userRepository.findAll();
+            return customerRepository.findAll();
     }
 
-    public void add(User user) {
-    userRepository.save(user);
+    public void add(Customer customer) {
+
+    this.customerRepository.save(customer);
     }
-    public List<UserCant> getUserCant(){
-        return userRepository.getUserCant();
+    public List<CustomerCant> getCustomerCant(){
+        return customerRepository.getCustomerCant();
     }
 
 }

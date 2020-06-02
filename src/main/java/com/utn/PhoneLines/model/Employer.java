@@ -7,30 +7,26 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@AllArgsConstructor//lombok
-@NoArgsConstructor//lombok
-@Data//lombok, generar setter and getters
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
-@Table(name="customers")
-public class Customer {
+@Table(name="employers")
+public class Employer {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer idCustomer;
+    private Integer idEmployer;
 
     private String name;
     private String lastName;
     private String dni;
-     private String userName;
+    private String userName;
     private String password;
-    //cuando consultamos uno tenga estado del otro
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference(value = "customer-city")//referencia para la entidad
+    @JsonBackReference(value = "fk_id_city")
     @JoinColumn(name = "idCity")
     private City city;
-
-
-
-
-
 
 }

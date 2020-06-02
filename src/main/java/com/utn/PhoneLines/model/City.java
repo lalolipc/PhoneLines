@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="Cities")
+@Table(name="cities")
 
 public class City {
     @Id
@@ -22,7 +22,7 @@ public class City {
     private String provinceName;
     private String prefix;
     @OneToMany(mappedBy = "city")
-    private List<User> listUsers;
+    private List<Customer> listCustomers;
 
 
 }
