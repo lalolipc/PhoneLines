@@ -21,7 +21,7 @@ public class City {
     private String name;
     private String provinceName;
     private String prefix;
-    @OneToMany(mappedBy = "city")
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="city", cascade=CascadeType.ALL)
     private List<Customer> listCustomers;
 
 

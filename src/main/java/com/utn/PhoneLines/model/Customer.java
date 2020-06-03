@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@AllArgsConstructor//lombok
-@NoArgsConstructor//lombok
-@Data//lombok, generar setter and getters
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name="customers")
 public class Customer {
@@ -25,7 +25,7 @@ public class Customer {
     //cuando consultamos uno tenga estado del otro
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference(value = "customer-city")//referencia para la entidad
-    @JoinColumn(name = "idCity")
+    @JoinColumn(name = "id_city")
     private City city;
 
 

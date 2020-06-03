@@ -3,3 +3,14 @@ spring:
     url:  jdbc:mysql://tpip.ddns.net:3306/tp_avanzada_1
     username: rocio
     password: 123
+
+#spring:
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#    ddl-auto: create-drop
