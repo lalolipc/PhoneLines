@@ -45,7 +45,7 @@ public class CustomerController {
 
 
 
-    @GetMapping("/{idPerson}")
+    @GetMapping("/{idCustomer}")
     public Customer getCustomerById(@PathVariable Integer idCustomer) throws UserNotExistsException {
           return customerService.getById(idCustomer);
 

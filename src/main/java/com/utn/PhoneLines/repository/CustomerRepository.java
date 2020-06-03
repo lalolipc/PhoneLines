@@ -18,4 +18,6 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
      List<Customer> findByName();
     @Query(value = "SELECT * FROM customers WHERE id_customer = ?1",nativeQuery = true)
     Customer getById(Integer idCustomer);
+
+
 }
