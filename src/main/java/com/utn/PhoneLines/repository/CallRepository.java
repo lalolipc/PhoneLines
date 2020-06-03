@@ -15,6 +15,9 @@ public interface CallRepository  extends JpaRepository<Call,Integer> {
 
     @Query(value="SELECT calls.total_price as last, customers.name, customers.dni from calls INNER JOIN phones on phones.id_phone=calls.id_origin_phone inner JOIN customers on customers.id_customer=phones.id_customer  ORDER BY calls.date_call DESC LIMIT 1",nativeQuery = true)
     List<CallLast> getCallLast();
+/*
+    @Query(value="SELECT calls.total_price as last, customers.name, customers.dni from calls INNER JOIN phones on phones.id_phone=calls.id_origin_phone inner JOIN customers on customers.id_customer=phones.id_customer   WHERE id_customer = ?1 ORDER BY calls.date_call DESC LIMIT 1",nativeQuery = true)
+    List<CallLast> getCallLast(Integer id_customer);*/
     @Query(value="SELECT cu.name, count(ca.id_origin_phone)as cant from calls ca inner join phones  ph on id_origin_phone=id_phone inner join customers cu on ph.id_customer=cu.id_customer group by cu.id_customer",nativeQuery = true)
     List<CallCant> getCallCant();
 }

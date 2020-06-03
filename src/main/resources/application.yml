@@ -7,14 +7,11 @@ spring:
 
 
 #spring:
-#  datasource:
+#   datasource:
 #    url:  jdbc:mysql://db4free.net:3306/basedatosutn
 #    username: lalolipc
 #    password: chocolate
-#  jpa:
-#    show-sql: true
-#    hibernate:
-#    ddl-auto: create-drop
+
 
 #spring:
 #  datasource:
