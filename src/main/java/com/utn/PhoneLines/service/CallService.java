@@ -4,6 +4,7 @@ import com.utn.PhoneLines.model.Call;
 import com.utn.PhoneLines.model.City;
 import com.utn.PhoneLines.model.Customer;
 import com.utn.PhoneLines.projection.CallCant;
+import com.utn.PhoneLines.projection.CallLast;
 import com.utn.PhoneLines.projection.CustomerCant;
 import com.utn.PhoneLines.repository.CallRepository;
 import com.utn.PhoneLines.repository.CustomerRepository;
@@ -31,5 +32,8 @@ public class CallService {
     }
     public List<CallCant> getCallCant(){
         return callRepository.getCallCant();
+    }
+    public List<CallLast> getCallLast(){
+        return callRepository.getCallLast();
     }
 }
