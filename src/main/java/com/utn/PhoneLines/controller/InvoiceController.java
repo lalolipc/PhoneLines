@@ -1,9 +1,35 @@
 package com.utn.PhoneLines.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.utn.PhoneLines.model.City;
+import com.utn.PhoneLines.model.Invoice;
+import com.utn.PhoneLines.service.CityService;
+import com.utn.PhoneLines.service.EmployerService;
+import com.utn.PhoneLines.service.InvoiceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/invoice")
 public class InvoiceController {
+    private final InvoiceService invoiceService;
+    @Autowired
+
+    public InvoiceController(InvoiceService invoiceService) {
+        this.invoiceService = invoiceService;
+    }
+
+    @GetMapping("/")
+    public List<Invoice> getAll()
+    {
+        return invoiceService.getAll();
+    }
+
+
+    @PostMapping("/")
+    public void addInvoice(@RequestBody final Invoice invoice){
+        invoiceService.add(invoice);
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.controller;
 
 
+import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Customer;
 import com.utn.PhoneLines.projection.CustomerCant;
 import com.utn.PhoneLines.service.CustomerService;
@@ -41,21 +42,14 @@ public class CustomerController {
     public List<CustomerCant> getCustomerCant() {
         return customerService.getCustomerCant();
     }
-/*
-    @GetMapping("pricelastcall/{id_customer}")
-    public ResponseEntity getPriceLastCallById(@PathVariable Integer id_customer) {
 
-        ResponseEntity response;
 
-        try {
 
-            response = costumerService.getPriceLastCall(id_customer);
+    @GetMapping("/{idPerson}")
+    public Customer getCustomerById(@PathVariable Integer idCustomer) throws UserNotExistsException {
+          return customerService.getById(idCustomer);
 
-        } catch (UserNotexistException E){
+    }
 
-            response = new ResponseEntity("User not exist", HttpStatus.CONFLICT);
-        }
 
-        return response;
-    }*/
 }

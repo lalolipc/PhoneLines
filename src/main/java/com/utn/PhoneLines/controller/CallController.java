@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.controller;
 
 import com.utn.PhoneLines.model.Call;
+import com.utn.PhoneLines.model.City;
 import com.utn.PhoneLines.model.Customer;
 import com.utn.PhoneLines.projection.CallCant;
 import com.utn.PhoneLines.projection.CustomerCant;
@@ -23,8 +24,10 @@ public class CallController {
     }
 
 
+
     @GetMapping("/")
-    public List<Call> getAll() {
+    public List<Call> getAll()
+    {
         return callService.getAll();
     }
 

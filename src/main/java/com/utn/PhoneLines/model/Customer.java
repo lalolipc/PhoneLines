@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="customers")
 public class Customer {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idCustomer;
@@ -23,7 +24,10 @@ public class Customer {
      private String userName;
     private String password;
     //cuando consultamos uno tenga estado del otro
-    @ManyToOne(fetch = FetchType.EAGER)
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "customer-city")//referencia para la entidad
     @JoinColumn(name = "id_city")
     private City city;

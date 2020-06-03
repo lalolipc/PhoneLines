@@ -22,18 +22,18 @@ public class Rate {
     private float minutePrice;
     private float costPrice;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "fk_id_city_from")
     @JoinColumn(name="idCityFrom")
     private City cityFrom;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "fk_id_city_to")
     @JoinColumn(name="idCityTo")
     private City cityTo;
 
-   /* @OneToMany(mappedBy = "rate")
-    private List<Call> listCalls;*/
+    @OneToMany(mappedBy = "rate")
+    private List<Call> listCalls;
 
 }

@@ -1,5 +1,6 @@
 package com.utn.PhoneLines.service;
 
+import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Customer;
 import com.utn.PhoneLines.projection.CustomerCant;
 import com.utn.PhoneLines.repository.CustomerRepository;
@@ -30,6 +31,12 @@ public class CustomerService {
 
     this.customerRepository.save(customer);
     }
+    public Customer getById(Integer idCustomer) throws UserNotExistsException {
+
+        return customerRepository.findById(idCustomer).orElseThrow(UserNotExistsException::new);
+
+    }
+
     public List<CustomerCant> getCustomerCant(){
         return customerRepository.getCustomerCant();
     }
