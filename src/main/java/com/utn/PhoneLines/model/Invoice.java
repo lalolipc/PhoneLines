@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,10 +21,15 @@ public class Invoice {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idInvoice;
 
+    @NotNull
     private Date dateInvoice;
+    @NotNull
     private float costPrice;
+    @NotNull
     private float totalPrice;
+    @NotNull
     private Date dueDate;
+    @NotNull
     private String status;//debe estar en enum
 
 

@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,9 @@ public class Phone {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idPhone;
 
+    @NotNull
     private String number;
+    @NotNull
     private String phoneType;//debe estar en un enum
 
     @OneToMany(mappedBy = "phone")
@@ -28,7 +31,7 @@ public class Phone {
     private List<Call> listCalls;*/
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference(value = "fk_id_customer")//referencia para la entidad
+    @JsonBackReference(value = "id_customer")//referencia para la entidad
     @JoinColumn(name = "idCustomer")
     private Customer customer;
 }

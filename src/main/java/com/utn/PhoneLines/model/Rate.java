@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,17 +20,19 @@ public class Rate {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idRate;
 
+    @NotNull
     private float minutePrice;
+    @NotNull
     private float costPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "fk_id_city_from")
+    @JsonBackReference(value = "id_city_from")
     @JoinColumn(name="idCityFrom")
     private City cityFrom;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "fk_id_city_to")
+    @JsonBackReference(value = "id_city_to")
     @JoinColumn(name="idCityTo")
     private City cityTo;
 

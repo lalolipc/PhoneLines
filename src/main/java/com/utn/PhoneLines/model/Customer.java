@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,15 @@ public class Customer {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idCustomer;
 
+    @NotNull
     private String name;
+    @NotNull
     private String lastName;
+    @NotNull
     private String dni;
-     private String userName;
+    @NotNull
+    private String userName;
+    @NotNull
     private String password;
     //cuando consultamos uno tenga estado del otro
 

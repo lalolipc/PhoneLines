@@ -7,32 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="employers")
-public class Employer {
-
+@Table(name="states")
+public class State {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer idEmployer;
+    private Integer idState;
 
     @NotNull
     private String name;
-    @NotNull
-    private String lastName;
-    @NotNull
-    private String dni;
-    @NotNull
-    private String userName;
-    @NotNull
-    private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference(value = "fk_id_city")
-    @JoinColumn(name = "idCity")
-    private City city;
 
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="state", cascade=CascadeType.ALL)
+    @JsonBackReference(value="listCities")
+    private List<City> listCities;
 }
