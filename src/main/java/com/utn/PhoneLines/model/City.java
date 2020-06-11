@@ -27,18 +27,18 @@ public class City {
     private String prefix;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "city-state")//referencia para la entidad
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_state")
     private State state;
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="city", cascade=CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER, mappedBy="city", cascade=CascadeType.ALL)
     @JsonBackReference(value="listUsers")
     private List<User> listUsers;
 
     @OneToMany(mappedBy = "cityFrom")
     @JsonBackReference(value="listRatesFrom")
     private List<Rate> listRatesFrom;
+
     @OneToMany(mappedBy = "cityTo")
     @JsonBackReference(value="listRatesTo")
     private List<Rate> listRatesTo;

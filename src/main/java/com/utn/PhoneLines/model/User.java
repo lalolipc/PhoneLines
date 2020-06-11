@@ -31,13 +31,11 @@ public class User {
     private String password;
     //cuando consultamos uno tenga estado del otro
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "customer-city")//referencia para la entidad
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_city")
     private City city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "user-type")//referencia para la entidad
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user_type")
     private UserType userType;
 

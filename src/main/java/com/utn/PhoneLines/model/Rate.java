@@ -26,13 +26,11 @@ public class Rate {
     private float costPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "id_city_from")
     @JoinColumn(name="idCityFrom")
     private City cityFrom;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "id_city_to")
     @JoinColumn(name="idCityTo")
     private City cityTo;
 
