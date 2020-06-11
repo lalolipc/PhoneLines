@@ -12,12 +12,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="customers")
-public class Customer {
+@Table(name="users")
+public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer idCustomer;
+    private Integer idUser;
 
     @NotNull
     private String name;
@@ -31,12 +31,15 @@ public class Customer {
     private String password;
     //cuando consultamos uno tenga estado del otro
 
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "customer-city")//referencia para la entidad
     @JoinColumn(name = "id_city")
     private City city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "user-type")//referencia para la entidad
+    @JoinColumn(name = "id_user_type")
+    private UserType userType;
 
 
 

@@ -1,6 +1,6 @@
 package com.utn.PhoneLines.projection;
 
-public interface CustomerCant {
+public interface UserCant {
     String getName();
     Integer getCant();
 }

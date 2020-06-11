@@ -1,14 +1,12 @@
 package com.utn.PhoneLines.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -35,8 +33,8 @@ public class City {
     private State state;
 
     @OneToMany(fetch=FetchType.LAZY, mappedBy="city", cascade=CascadeType.ALL)
-    @JsonBackReference(value="listCustomers")
-    private List<Customer> listCustomers;
+    @JsonBackReference(value="listUsers")
+    private List<User> listUsers;
 
     @OneToMany(mappedBy = "cityFrom")
     @JsonBackReference(value="listRatesFrom")

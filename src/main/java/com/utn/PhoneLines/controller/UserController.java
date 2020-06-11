@@ -2,52 +2,51 @@ package com.utn.PhoneLines.controller;
 
 
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
-import com.utn.PhoneLines.model.Customer;
-import com.utn.PhoneLines.projection.CustomerCant;
-import com.utn.PhoneLines.service.CustomerService;
+import com.utn.PhoneLines.model.User;
+import com.utn.PhoneLines.projection.UserCant;
+import com.utn.PhoneLines.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/user")
 
-public class CustomerController {
+public class UserController {
 
-    private final CustomerService customerService;
+    private final UserService userService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
 
     @GetMapping("/")
     @ResponseBody
-    public List<Customer> getAll(@RequestParam(required = false)String name) {
+    public List<User> getAll(@RequestParam(required = false)String name) {
 
-        return customerService.getAll(name);
+        return userService.getAll(name);
     }
 
 
     @PostMapping("/")
-    public void addCustomer(@RequestBody final Customer customer) {
-        customerService.add(customer);
+    public void addUser(@RequestBody final User user) {
+        userService.add(user);
 
     }
 
     @GetMapping("/projection")
-    public List<CustomerCant> getCustomerCant() {
-        return customerService.getCustomerCant();
+    public List<UserCant> getCustomerCant() {
+        return userService.getCustomerCant();
     }
 
 
 
-    @GetMapping("/{idCustomer}")
-    public Customer getCustomerById(@PathVariable Integer idCustomer) throws UserNotExistsException {
-          return customerService.getById(idCustomer);
+    @GetMapping("/{idUser}")
+    public User getUserById(@PathVariable Integer idUser) throws UserNotExistsException {
+          return userService.getById(idUser);
 
     }
 

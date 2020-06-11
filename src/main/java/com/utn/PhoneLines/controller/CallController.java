@@ -1,12 +1,8 @@
 package com.utn.PhoneLines.controller;
 
 import com.utn.PhoneLines.model.Call;
-import com.utn.PhoneLines.model.City;
-import com.utn.PhoneLines.model.Customer;
 import com.utn.PhoneLines.projection.CallCant;
-import com.utn.PhoneLines.projection.CustomerCant;
 import com.utn.PhoneLines.service.CallService;
-import com.utn.PhoneLines.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

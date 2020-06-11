@@ -1,9 +1,9 @@
 package com.utn.PhoneLines.service;
 
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
-import com.utn.PhoneLines.model.Customer;
-import com.utn.PhoneLines.projection.CustomerCant;
-import com.utn.PhoneLines.repository.CustomerRepository;
+import com.utn.PhoneLines.model.User;
+import com.utn.PhoneLines.projection.UserCant;
+import com.utn.PhoneLines.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,33 +12,33 @@ import java.util.List;
 import static java.util.Objects.isNull;
 
 @Service
-public class CustomerService {
-    private final CustomerRepository customerRepository;
+public class UserService {
+    private final UserRepository userRepository;
 @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public List<Customer> getAll(String name) {
+    public List<User> getAll(String name) {
     if(isNull(name))
     {
-        return customerRepository.findAll();
+        return userRepository.findAll();
     }
-    return  customerRepository.findByName();
-    }
-
-    public void add(Customer customer) {
-
-    this.customerRepository.save(customer);
-    }
-    public Customer getById(Integer idCustomer) throws UserNotExistsException {
-
-        return customerRepository.findById(idCustomer).orElseThrow(UserNotExistsException::new);
-
+    return  userRepository.findByName();
     }
 
-    public List<CustomerCant> getCustomerCant(){
-        return customerRepository.getCustomerCant();
+    public void add(User user) {
+
+    this.userRepository.save(user);
+    }
+    public User getById(Integer idUser) throws UserNotExistsException {
+
+        return userRepository.findById(idUser).orElseThrow(UserNotExistsException::new);
+
+    }
+
+    public List<UserCant> getCustomerCant(){
+        return userRepository.getUserCant();
     }
 
 }

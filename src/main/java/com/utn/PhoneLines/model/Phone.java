@@ -31,7 +31,7 @@ public class Phone {
     private List<Call> listCalls;*/
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference(value = "id_customer")//referencia para la entidad
-    @JoinColumn(name = "idCustomer")
-    private Customer customer;
+    @JsonBackReference(value = "id_user")//referencia para la entidad
+    @JoinColumn(name = "idUser")
+    private User user;
 }

@@ -38,4 +38,10 @@ public class Invoice {
     @JsonBackReference(value = "fk_id_phone")
     @JoinColumn(name = "idPhone")
     private Phone phone;
+
+    //para liquidar clientes necesito idUser en la Factura
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference(value = "id_user_invoice")
+    @JoinColumn(name = "idUser")
+    private User user;
 }
