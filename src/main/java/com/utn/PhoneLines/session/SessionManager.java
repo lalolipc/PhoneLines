@@ -42,6 +42,10 @@ public class SessionManager {
     }
 
     public User getCurrentUser(String token) {
-        return getSession(token).getLoggedUser();
+        Session s = getSession(token);
+        if(s!=null){
+            return s.getLoggedUser();
+        }
+        return null;
     }
 }

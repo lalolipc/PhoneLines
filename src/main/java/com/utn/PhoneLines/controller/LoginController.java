@@ -8,6 +8,7 @@ import com.utn.PhoneLines.service.UserService;
 import com.utn.PhoneLines.session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,12 @@ public class LoginController {
         ResponseEntity response;
         try {
             User u = userService.getByUserNameAndPassword(loginInput);
-            String token = sessionManager.createSession(u);
-            response = ResponseEntity.ok().headers(createHeaders(token)).build();
+            if(u!=null) {
+                String token = sessionManager.createSession(u);
+                response = ResponseEntity.ok().headers(createHeaders(token)).build();
+            }else{
+                response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
         } catch (Exception | UserNotExistsException e) {
             throw new InvalidLoginException(e);
         }

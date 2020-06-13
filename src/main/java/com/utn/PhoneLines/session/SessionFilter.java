@@ -25,10 +25,13 @@ public class SessionFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String sessionToken = request.getHeader("Authorization");
-        User user = sessionManager.getCurrentUser(sessionToken);
         String url = request.getRequestURI();
-        String filter = url.split("/")[3];
-        if (user != null) {
+        String filter = url.split("/")[1];
+        User user = null;
+        if(!filter.equals("login")){
+           user = sessionManager.getCurrentUser(sessionToken);
+        }
+        if (user != null || filter.equals("login")) {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpStatus.FORBIDDEN.value());
