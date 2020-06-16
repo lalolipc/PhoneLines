@@ -33,4 +33,8 @@ public class Phone {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUser")
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCity")
+    private City city;
 }

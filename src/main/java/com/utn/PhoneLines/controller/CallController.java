@@ -1,9 +1,20 @@
 package com.utn.PhoneLines.controller;
 
+import com.utn.PhoneLines.exceptions.InvalidLoginException;
+import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Call;
+import com.utn.PhoneLines.model.Invoice;
+import com.utn.PhoneLines.model.User;
+import com.utn.PhoneLines.model.dto.CallInput;
+import com.utn.PhoneLines.model.dto.CallUserFilter;
 import com.utn.PhoneLines.projection.CallCant;
+import com.utn.PhoneLines.projection.CallUserAndDate;
+import com.utn.PhoneLines.projection.Infraestructure;
 import com.utn.PhoneLines.service.CallService;
+import com.utn.PhoneLines.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +23,8 @@ import java.util.List;
 @RequestMapping("/call")
 public class CallController {
 
-    private final CallService callService;
+    CallService callService;
+    UserService userService;
 
     @Autowired
     public CallController(CallService callService) {
@@ -39,5 +51,22 @@ public class CallController {
         return callService.getCallCant();
     }
 
+    @PostMapping("/infraestructure")
+    public Infraestructure getInfraData(@RequestHeader("Authorization") String token,@RequestBody CallInput callInput) {
 
-}
+        return callService.addCallFromInfraestructure(callInput);
+    }
+
+    @PostMapping("/CallUserAndDate")
+    public  List<CallUserAndDate> getCallsOfUserByDate(@RequestHeader("Authorization") String token, @RequestBody CallUserFilter callUserFilter) throws UserNotExistsException {
+
+            List<CallUserAndDate> calls = callService.getCallsByUserByDate(callUserFilter);
+         return calls;
+
+    }
+
+
+    }
+
+
+

@@ -52,6 +52,18 @@ public class Call {
     private float totalPrice;
     @NotNull
     private float costPrice;
+    @NotNull
+    private float salePrice;
+    @NotNull
+    private int id_user;
+    @NotNull
+    private String numberOrigin;
+    @NotNull
+    private String numberDestination;
+    @NotNull
+    private String cityOrigin;
+    @NotNull
+    private String cityDestination;
 
 
 

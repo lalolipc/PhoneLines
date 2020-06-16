@@ -5,17 +5,6 @@ spring:
     password:
 
 
-
-#spring:
-#  datasource:
-#    url:  jdbc:mysql://db4free.net:3306/basedatosutn
-#    username: lalolipc
-#    password: chocolate
-#  jpa:
-#    show-sql: true
-#    hibernate:
-#    ddl-auto: create-drop
-
 #spring:
 #  datasource:
 #    url:  jdbc:mysql://tpip.ddns.net:3306/tp_avanzada_1

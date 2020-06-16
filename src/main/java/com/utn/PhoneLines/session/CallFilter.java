@@ -1,5 +1,7 @@
 package com.utn.PhoneLines.session;
 
+import com.utn.PhoneLines.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,8 @@ public class CallFilter extends OncePerRequestFilter {
                                     HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         filterChain.doFilter(request, response);
-       /* String authorization = request.getHeader("Authorization");
+/*
+ String authorization = request.getHeader("Authorization");
 
         if ("antennapassword8232".equals(authorization)) {
             filterChain.doFilter(request, response);
@@ -27,4 +30,7 @@ public class CallFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.FORBIDDEN.value());
         }*/
     }
+
+
+
 }

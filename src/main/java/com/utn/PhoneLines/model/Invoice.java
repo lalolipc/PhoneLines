@@ -30,7 +30,7 @@ public class Invoice {
     @NotNull
     private Date dueDate;
     @NotNull
-    private String status;//debe estar en enum
+    private String statusInvoice;//debe estar en enum
 
 
 

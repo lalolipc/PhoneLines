@@ -21,7 +21,7 @@ public class Rate {
     private Integer idRate;
 
     @NotNull
-    private float minutePrice;
+    private float salePrice;
     @NotNull
     private float costPrice;
 
