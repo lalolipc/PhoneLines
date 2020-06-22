@@ -1,21 +1,26 @@
 package com.utn.PhoneLines.model.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.Date;
+
+import java.time.LocalDateTime;
+
+
+
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class CallInput {
 
-private  String originNumber;
-private  String destinationNumber;
-private float duration;
-private Date callDate;
+
+    private  String numberOrigin;
+    private  String numberDestination;
+    private float duration;
+    private LocalDateTime callDate= LocalDateTime.now();
 
 
 }

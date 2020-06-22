@@ -5,7 +5,8 @@ import java.util.Date;
 
 public interface Infraestructure {
 
+
     Integer getIdCall();
-    Date getDateCall();
+
 
 }

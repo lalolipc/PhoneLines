@@ -1,14 +1,15 @@
 package com.utn.PhoneLines.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,38 +23,34 @@ public class Call {
     //cuando consultamos una tabla tenga estado de la otra
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "id_origin_phone")
     @JoinColumn(name = "idOriginPhone")
     private Phone originPhone;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "id_origin_phone")
     @JoinColumn(name = "idDestinationPhone")
     private Phone destinationPhone;
 
     @NotNull
-    private Date dateCall;
+    private LocalDateTime dateCall;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "id_rate")
     @JoinColumn(name = "idRate")
     private Rate rate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "id_invoice")
     @JoinColumn(name = "idInvoice")
     private Invoice invoice;
 
     @NotNull
-    private Integer duration;
+    private double duration;
     @NotNull
-    private float totalPrice;
+    private double totalPrice;
     @NotNull
-    private float costPrice;
+    private double costPrice;
     @NotNull
-    private float salePrice;
+    private double salePrice;
     @NotNull
     private int id_user;
     @NotNull

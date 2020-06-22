@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -56,8 +58,8 @@ public class CallController {
 
         return callService.addCallFromInfraestructure(callInput);
     }
-
-    @PostMapping("/CallUserAndDate")
+//will fix
+    @GetMapping("/CallUserAndDate")
     public  List<CallUserAndDate> getCallsOfUserByDate(@RequestHeader("Authorization") String token, @RequestBody CallUserFilter callUserFilter) throws UserNotExistsException {
 
             List<CallUserAndDate> calls = callService.getCallsByUserByDate(callUserFilter);

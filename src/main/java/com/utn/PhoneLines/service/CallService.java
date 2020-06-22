@@ -18,7 +18,7 @@ import java.util.List;
 public class CallService {
 
     private final CallRepository callRepository;
-    //private final UserRepository userRepository;
+   // private final UserRepository userRepository;
     @Autowired
     public CallService(CallRepository callRepository) {
         this.callRepository = callRepository;
@@ -39,7 +39,7 @@ public class CallService {
 
     public Infraestructure addCallFromInfraestructure(CallInput call) {
         try {
-            return callRepository.addCallFromInfraestructure(call.getOriginNumber(), call.getDestinationNumber(), call.getDuration(), call.getCallDate());
+            return callRepository.addCallFromInfraestructure(call.getNumberOrigin(), call.getNumberDestination(), call.getDuration(), call.getCallDate());
 
         }catch (Exception ex){
             throw ex;
@@ -49,7 +49,8 @@ public class CallService {
 
 
     public List<CallUserAndDate> getCallsByUserByDate(CallUserFilter callUserFilter) throws UserNotExistsException {
-        //userRepository.findById(callUserFilter.getIdUser()).orElseThrow(() -> new UserNotExistsException());
+       // User u= userRepository.findById(callUserFilter.getIdUser()).orElseThrow(() -> new UserNotExistsException());
+
         return callRepository.getReportCallsByUserByDate(callUserFilter.getIdUser(),callUserFilter.getDateFrom(),callUserFilter.getDateTo());
     }
 

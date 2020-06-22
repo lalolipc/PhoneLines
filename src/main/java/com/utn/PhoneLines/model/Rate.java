@@ -38,3 +38,4 @@ public class Rate {
     private List<Call> listCalls;
 
 }
+

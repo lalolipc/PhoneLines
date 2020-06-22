@@ -7,12 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-@AllArgsConstructor//lombok
-@NoArgsConstructor//lombok
-@Data//lombok, generar setter and getters
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name="invoices")
 public class Invoice {
@@ -22,15 +23,20 @@ public class Invoice {
     private Integer idInvoice;
 
     @NotNull
-    private Date dateInvoice;
+    private LocalDateTime dateInvoice;
+
     @NotNull
     private float costPrice;
     @NotNull
     private float totalPrice;
+
     @NotNull
-    private Date dueDate;
+    private LocalDateTime dueDate;
     @NotNull
-    private String statusInvoice;//debe estar en enum
+    private Integer calls_amount;
+
+    @NotNull
+    private boolean paid;
 
 
 
@@ -38,7 +44,6 @@ public class Invoice {
     @JoinColumn(name = "idPhone")
     private Phone phone;
 
-    //para liquidar clientes necesito idUser en la Factura
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUser")
     private User user;

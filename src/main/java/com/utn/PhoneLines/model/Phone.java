@@ -37,4 +37,7 @@ public class Phone {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idCity")
     private City city;
+
+    @NotNull
+    private boolean active;
 }
