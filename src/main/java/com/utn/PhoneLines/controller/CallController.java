@@ -4,7 +4,6 @@ import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Call;
 import com.utn.PhoneLines.model.dto.CallInput;
 import com.utn.PhoneLines.model.dto.CallUserFilter;
-import com.utn.PhoneLines.projection.CallCant;
 import com.utn.PhoneLines.projection.CallUserAndDate;
 import com.utn.PhoneLines.projection.Infraestructure;
 import com.utn.PhoneLines.service.CallService;
@@ -54,15 +53,7 @@ public class CallController {
         }
     }
 
-    @GetMapping("/projection")
-    public ResponseEntity<List<CallCant>> getCallCant() {
-        try{
-            List<CallCant> callsCant = callService.getCallCant();
-            return callsCant.size()>0 ? ResponseEntity.ok(callsCant) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }catch (Exception ex){
-            throw ex;
-        }
-    }
+
 
     @PostMapping("/infraestructure")
     public ResponseEntity<Infraestructure> getInfraData(@RequestHeader("Authorization") String token,@RequestBody CallInput callInput) {

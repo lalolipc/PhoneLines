@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -18,41 +17,44 @@ import java.util.Date;
 public class Call {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id_call")
     private Integer idCall;
 
     //cuando consultamos una tabla tenga estado de la otra
-    @NotNull
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idOriginPhone")
+    @JoinColumn(name = "id_origin_phone")
     private Phone originPhone;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idDestinationPhone")
+    @JoinColumn(name = "id_destination_phone")
     private Phone destinationPhone;
 
-    @NotNull
+    @Column(name="date_call")
     private LocalDateTime dateCall;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idRate")
+    @JoinColumn(name = "id_rate")
     private Rate rate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idInvoice")
+    @JoinColumn(name = "id_invoice")
     private Invoice invoice;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    private User user;
+
     @NotNull
-    private double duration;
+    private Integer duration;
     @NotNull
     private double totalPrice;
     @NotNull
     private double costPrice;
     @NotNull
     private double salePrice;
-    @NotNull
-    private int id_user;
+
     @NotNull
     private String numberOrigin;
     @NotNull
