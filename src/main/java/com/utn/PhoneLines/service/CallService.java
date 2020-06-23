@@ -29,9 +29,9 @@ public class CallService {
 
         return callRepository.findAll();
     }
-    public void add(Call call) {
+    public Call add(Call call) {
 
-        this.callRepository.save(call);
+        return this.callRepository.save(call);
     }
     public List<CallCant> getCallCant(){
         return callRepository.getCallCant();

@@ -1,11 +1,21 @@
 package com.utn.PhoneLines.controller;
 
+import com.utn.PhoneLines.exceptions.ResourceNotExistException;
+import com.utn.PhoneLines.model.Call;
 import com.utn.PhoneLines.service.CallService;
 import com.utn.PhoneLines.session.SessionManager;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.mock;
+
 public class CallControllerTest {
-/*
+
     CallController controller;
     CallService service;
     SessionManager sessionManagerService;
@@ -17,7 +27,7 @@ public class CallControllerTest {
         sessionManagerService = mock(SessionManager.class);
         controller = new CallController(service,sessionManagerService);
     }
-
+/*
     @Test
     public void getAllOk() throws ResourceNotExistException, Exception {
         Call Call = new Call();
