@@ -2,8 +2,9 @@ package com.utn.PhoneLines.controller;
 
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Call;
-import com.utn.PhoneLines.model.dto.CallInput;
-import com.utn.PhoneLines.model.dto.CallUserFilter;
+import com.utn.PhoneLines.model.User;
+import com.utn.PhoneLines.model.dto.CallInfraestructure;
+import com.utn.PhoneLines.model.dto.CallRangeDate;
 import com.utn.PhoneLines.projection.CallUserAndDate;
 import com.utn.PhoneLines.projection.Infraestructure;
 import com.utn.PhoneLines.service.CallService;
@@ -20,7 +21,6 @@ import java.util.List;
 @RequestMapping("/call")
 public class CallController {
 
-    UserService userService;
     private final CallService callService;
     private final SessionManager sessionManager;
 
@@ -31,49 +31,33 @@ public class CallController {
     }
 
 
-
-    @GetMapping("/")
-    public ResponseEntity<List<Call>> getAll()
-    {
+    @PostMapping("/infraestructure/")
+    public ResponseEntity<Infraestructure> getInfraData(@RequestHeader("Authorization") String token,@RequestBody CallInfraestructure callInfraestructure) {
         try{
-            List<Call> calls = callService.getAll();
-            return calls.size()>0 ? ResponseEntity.ok(calls) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            return ResponseEntity.status(HttpStatus.CREATED).body(callService.addCallFromInfraestructure(callInfraestructure));
         }catch (Exception ex){
             throw ex;
         }
     }
 
+    @GetMapping("/Client/allcalls")
+    public  ResponseEntity<List<CallUserAndDate>> getCallsOfUserByDate(@RequestHeader("Authorization") String token, @RequestBody CallRangeDate callRangeDate) throws UserNotExistsException {
+       User currentUser = sessionManager.getCurrentUser(token);
+        callRangeDate.setIdUser(currentUser.getIdUser());
 
-    @PostMapping("/")
-    public ResponseEntity addCall(@RequestBody final Call call) {
+            List<CallUserAndDate> listtCalls = callService.getCallsByUserByDate(callRangeDate);
+            return listtCalls.size()>0 ? ResponseEntity.ok(listtCalls) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    }
+    @GetMapping("/Employee/allcalls/{idUser}")
+    public  ResponseEntity<List<CallUserAndDate>> getCallsById(@RequestHeader("Authorization") String token, @PathVariable Integer idUser) throws UserNotExistsException {
         try{
-            return ResponseEntity.status(HttpStatus.CREATED).body(callService.add(call));
+            List<CallUserAndDate> listCalls = callService.getCallsByUser(idUser);
+            return listCalls.size()>0 ? ResponseEntity.ok(listCalls) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }catch (Exception ex){
             throw ex;
         }
     }
-
-
-
-    @PostMapping("/infraestructure")
-    public ResponseEntity<Infraestructure> getInfraData(@RequestHeader("Authorization") String token,@RequestBody CallInput callInput) {
-        try{
-            return ResponseEntity.status(HttpStatus.CREATED).body(callService.addCallFromInfraestructure(callInput));
-        }catch (Exception ex){
-            throw ex;
-        }
-    }
-//will fix
-    @GetMapping("/CallUserAndDate")
-    public  ResponseEntity<List<CallUserAndDate>> getCallsOfUserByDate(@RequestHeader("Authorization") String token, @RequestBody CallUserFilter callUserFilter) throws UserNotExistsException, Exception {
-        try{
-            List<CallUserAndDate> callsCant = callService.getCallsByUserByDate(callUserFilter);
-            return callsCant.size()>0 ? ResponseEntity.ok(callsCant) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }catch (Exception ex){
-            throw ex;
-        }
-    }
-
 
     }
 

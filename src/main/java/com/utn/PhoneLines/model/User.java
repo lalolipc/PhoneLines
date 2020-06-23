@@ -1,6 +1,5 @@
 package com.utn.PhoneLines.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

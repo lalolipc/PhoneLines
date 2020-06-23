@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.session;
 
 import com.utn.PhoneLines.model.User;
+import com.utn.PhoneLines.model.enums.UserTypeEnum;
 
 import java.util.Date;
 
@@ -39,4 +40,6 @@ public class Session {
     public void setLastAction(Date lastAction) {
         this.lastAction = lastAction;
     }
+//agregado tipo  empleado
+    public boolean isEmployee(){ return loggedUser.getUserType().getName() == UserTypeEnum.EMPLOYEE;}
 }

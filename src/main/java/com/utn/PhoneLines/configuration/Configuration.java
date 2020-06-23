@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.configuration;
 
-import com.utn.PhoneLines.session.CallFilter;
+import com.utn.PhoneLines.session.InfraestructureFilter;
+import com.utn.PhoneLines.session.BackofficeSessionFilter;
 import com.utn.PhoneLines.session.SessionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -13,8 +14,17 @@ public class Configuration {
     @Autowired
     SessionFilter sessionFilter;
     @Autowired
-    CallFilter callFilter;
-
+    InfraestructureFilter infraestructureFilter;
+    @Autowired
+    BackofficeSessionFilter backofficeSessionFilter;
+    /*
+        @Bean
+        public FilterRegistrationBean backofficeFilter() {
+            FilterRegistrationBean backoffice = new FilterRegistrationBean();
+            backoffice.setFilter(employeeSessionFilter);
+            backoffice.addUrlPatterns("/backoffice/*");
+            return backoffice;
+        }*/
     @Bean
     public FilterRegistrationBean userFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
@@ -26,8 +36,9 @@ public class Configuration {
     @Bean
     public FilterRegistrationBean antennaFilter() {
         FilterRegistrationBean antena = new FilterRegistrationBean();
-        antena.setFilter(callFilter);
-        antena.addUrlPatterns("/antenna/*");
+        antena.setFilter(infraestructureFilter);
+        antena.addUrlPatterns("/infraestructure/*");
         return antena;
     }
+
 }

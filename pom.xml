@@ -64,6 +64,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!--Junit-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -108,11 +109,10 @@
 						</goals>
 						<configuration>
 							<excludes>
-								<exclude>com/utn/PhoneLines/model/**/*</exclude>
-								<exclude>com/utn/PhoneLines/session/**</exclude>
-								<exclude>com/utn/PhoneLines/configuration/**</exclude>
-								<exclude>com/utn/PhoneLines/exceptions/**</exclude>
-								<exclude>com/utn/PhoneLines/PhoneLinesApplication</exclude>
+								<exclude>*/model/*</exclude>
+								<exclude>*/session/*</exclude>
+								<exclude>*/configuration/*</exclude>
+								<exclude>*/exceptions/*</exclude>
 							</excludes>
 							<rules>
 								<rule>
@@ -121,7 +121,7 @@
 										<limit>
 											<counter>INSTRUCTION</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.80</minimum>
+											<minimum>0.70</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -131,7 +131,7 @@
 										<limit>
 											<counter>BRANCH</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.80</minimum>
+											<minimum>0.70</minimum>
 										</limit>
 									</limits>
 								</rule>

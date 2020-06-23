@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CallInput {
+public class CallInfraestructure {
 
 
     private  String numberOrigin;

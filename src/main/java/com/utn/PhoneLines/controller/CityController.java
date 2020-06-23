@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/city")
 public class CityController {
     private final CityService cityService;
-
+//no testear, dejar para el examen laboratorio
     @Autowired
 
     public CityController(CityService cityService) {

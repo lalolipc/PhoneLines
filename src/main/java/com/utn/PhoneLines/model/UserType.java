@@ -1,6 +1,7 @@
 package com.utn.PhoneLines.model;
 
 import com.sun.istack.NotNull;
+import com.utn.PhoneLines.model.enums.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,9 @@ public class UserType {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idUserType;
 
-    @NotNull
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(name="name")
+    private UserTypeEnum name;
+
+
 }

@@ -5,6 +5,7 @@ import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.User;
 import com.utn.PhoneLines.model.UserType;
 import com.utn.PhoneLines.model.dto.LoginInput;
+import com.utn.PhoneLines.model.enums.UserTypeEnum;
 import com.utn.PhoneLines.service.UserService;
 import com.utn.PhoneLines.session.SessionManager;
 
@@ -35,7 +36,7 @@ public class LoginControllerTest {
     @Test
     public void loginOk() throws Exception, ValidationException, InvalidLoginException, UserNotExistsException {
         UserType userType = new UserType();
-        userType.setName("EMPLOYEE");
+        userType.setName(UserTypeEnum.EMPLOYEE);
         User user = new User();
         user.setIdUser(1);
         user.setName("name");

@@ -16,7 +16,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
+//si
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -31,7 +31,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/")
+    @PostMapping("/backoffice/adduser")
     public void addUser(@RequestBody final User user) {
         userService.add(user);
 

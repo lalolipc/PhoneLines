@@ -2,9 +2,8 @@ package com.utn.PhoneLines.service;
 
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Call;
-import com.utn.PhoneLines.model.dto.CallInput;
-import com.utn.PhoneLines.model.dto.CallUserFilter;
-import com.utn.PhoneLines.projection.RatesBackOffice;
+import com.utn.PhoneLines.model.dto.CallInfraestructure;
+import com.utn.PhoneLines.model.dto.CallRangeDate;
 import com.utn.PhoneLines.projection.CallUserAndDate;
 import com.utn.PhoneLines.projection.Infraestructure;
 import com.utn.PhoneLines.repository.CallRepository;
@@ -33,7 +32,7 @@ public class CallService {
     }
 
 
-    public Infraestructure addCallFromInfraestructure(CallInput call) {
+    public Infraestructure addCallFromInfraestructure(CallInfraestructure call) {
         try {
             return callRepository.addCallFromInfraestructure(call.getNumberOrigin(), call.getNumberDestination(), call.getDuration(), call.getCallDate());
 
@@ -44,12 +43,14 @@ public class CallService {
     }
 
 
-    public List<CallUserAndDate> getCallsByUserByDate(CallUserFilter callUserFilter) throws UserNotExistsException {
+    public List<CallUserAndDate> getCallsByUserByDate(CallRangeDate callRangeDate) throws UserNotExistsException {
        // User u= userRepository.findById(callUserFilter.getIdUser()).orElseThrow(() -> new UserNotExistsException());
 
-        return callRepository.getReportCallsByUserByDate(callUserFilter.getIdUser(),callUserFilter.getDateFrom(),callUserFilter.getDateTo());
+        return callRepository.getReportCallsByUserByDate(callRangeDate.getIdUser(), callRangeDate.getDateFrom(), callRangeDate.getDateTo());
     }
 
 
-
+    public List<CallUserAndDate> getCallsByUser(Integer idUser) {
+        return callRepository.getCallsByUser(idUser);
+    }
 }

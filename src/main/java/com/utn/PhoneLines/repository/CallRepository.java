@@ -24,5 +24,8 @@ public interface CallRepository  extends JpaRepository<Call,Integer> {
     @Query(value = " CALL sp_CallsUserRangeDate(:iduser,:datefrom,:dateto);", nativeQuery = true)
     List<CallUserAndDate> getReportCallsByUserByDate(@Param("iduser") Integer idUser, @Param("datefrom") Date dateFrom, @Param("dateto") Date dateTo );
 
+    @Query(value = " CALL sp_CallsbyUser(:iduser);", nativeQuery = true)
+    List<CallUserAndDate> getCallsByUser(@Param("iduser")Integer idUser);
+
     // jpa brinda : List<CallUserAndDate> findByDateCallBetweenFromAndTo (LocalDateTime from, LocalDateTime to, User user);
 }
