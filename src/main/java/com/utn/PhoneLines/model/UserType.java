@@ -15,6 +15,19 @@ import javax.persistence.*;
 @Table(name="usertypes")
 public class UserType {
 
+    public enum EUSERTYPE{
+        CLIENT(1), EMPLOYEER(2);;
+
+        private int value;
+
+        public int getValue() {
+            return value;
+        }
+
+        private EUSERTYPE(int _val){
+            this.value= _val;
+        }
+    }
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idUserType;

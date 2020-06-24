@@ -9,9 +9,13 @@ import java.util.*;
 @Component
 public class SessionManager {
 
-    Map<String, Session> sessionMap = new Hashtable<>();
+    Map<String, Session> sessionMap;
+    int sessionExpiration = 600000;
 
-    int sesionExpiration = 60;
+
+    public SessionManager() {
+        sessionMap = new Hashtable<>();
+    }
 
     public String createSession(User user) {
         String token = UUID.randomUUID().toString();
@@ -19,12 +23,31 @@ public class SessionManager {
         return token;
     }
 
+    public String createSession(User user, String token) {
+        sessionMap.put(token, new Session(token, user, new Date(System.currentTimeMillis())));
+        return token;
+    }
+
     public Session getSession(String token) {
+        if (token == null) {
+            return null;
+        }
         Session session = sessionMap.get(token);
-        if (session!=null) {
+        if (session != null) {
             session.setLastAction(new Date(System.currentTimeMillis()));
         }
         return session;
+    }
+
+    public boolean userIsLogged(User u){
+
+        for (Session session : sessionMap.values()){
+            if(session.getLoggedUser().getIdUser() == u.getIdUser()){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void removeSession(String token) {
@@ -34,7 +57,7 @@ public class SessionManager {
     public void expireSessions() {
         for (String k : sessionMap.keySet()) {
             Session v = sessionMap.get(k);
-            if (v.getLastAction().getTime() < System.currentTimeMillis() + (sesionExpiration*1000)) {
+            if (v.getLastAction().getTime() + (sessionExpiration * 1000) < System.currentTimeMillis()) {
                 System.out.println("Expiring session " + k);
                 sessionMap.remove(k);
             }
@@ -42,10 +65,6 @@ public class SessionManager {
     }
 
     public User getCurrentUser(String token) {
-        Session s = getSession(token);
-        if(s!=null){
-            return s.getLoggedUser();
-        }
-        return null;
+        return getSession(token).getLoggedUser();
     }
 }

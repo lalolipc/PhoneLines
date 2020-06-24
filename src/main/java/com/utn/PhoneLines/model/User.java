@@ -38,7 +38,8 @@ public class User {
     @JoinColumn(name = "id_user_type")
     private UserType userType;
 
-
+    @Column(name = "active", columnDefinition = "bool default true")
+    private Boolean active;
 
 
 
