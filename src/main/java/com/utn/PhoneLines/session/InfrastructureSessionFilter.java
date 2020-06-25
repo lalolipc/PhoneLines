@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class AntennaSessionFilter extends OncePerRequestFilter {
+public class InfrastructureSessionFilter extends OncePerRequestFilter {
 
     @Autowired
     private SessionManager sessionManager;

@@ -1,4 +1,4 @@
-package com.utn.PhoneLines.controller;
+package com.utn.PhoneLines.controller.web;
 
 import com.utn.PhoneLines.exceptions.InvalidLoginException;
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
