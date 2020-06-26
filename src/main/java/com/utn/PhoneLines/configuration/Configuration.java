@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+
 @EnableScheduling
 @org.springframework.context.annotation.Configuration
 @PropertySource("application.properties")
@@ -44,5 +45,8 @@ public class Configuration {
         registration.addUrlPatterns("/infrastructure/*");
         return registration;
     }
+
+
+
 
 }

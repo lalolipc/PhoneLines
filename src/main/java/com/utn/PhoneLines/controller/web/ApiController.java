@@ -12,6 +12,7 @@ import com.utn.PhoneLines.projection.CallUserAndDate;
 import com.utn.PhoneLines.session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,7 +69,12 @@ public class ApiController {
 
         return this.callController.getLocalitiesToByCallIdUser(currentUser.getIdUser());
     }
+
+
+
 */
+
+
     @GetMapping( "/calls/between-dates/{startDate}/{finalDate}")
     public ResponseEntity<List<CallUserAndDate>> getCallsBtwDates(@RequestHeader("Authorization") String sessionToken,
                                                                   @PathVariable(value = "startDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String startDate,
@@ -78,7 +84,9 @@ public class ApiController {
         User currentUser = getCurrentUser(sessionToken);
         return this.callController.getCallsOfUserByDate(sessionToken, new CallRangeDate(currentUser.getIdUser(), Date.valueOf(startDate),Date.valueOf(finalDate)));
 
-    }/*
+    }
+
+    /*
 
     @GetMapping("/bills")
     public ResponseEntity<List<Bill>> getBills(@RequestHeader("Authorization") String sessionToken) throws UserException {
