@@ -24,7 +24,7 @@ public class InfrastructureSessionFilter extends OncePerRequestFilter {
 
         String sessionToken = request.getHeader("Authorization");
 
-        if (sessionToken.equals("12345") && request.getRequestURI().equals("/antenna/") ){
+        if (sessionToken.equals("12345") && request.getRequestURI().equals("/infrastructure/") ){
             filterChain.doFilter(request, response);
         }
         else {

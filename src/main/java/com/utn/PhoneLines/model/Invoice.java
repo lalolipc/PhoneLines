@@ -1,6 +1,5 @@
 package com.utn.PhoneLines.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,8 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +20,7 @@ public class Invoice {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idInvoice;
 
-    @NotNull
+    @Column(name="date_invoice")
     private LocalDateTime dateInvoice;
 
     @NotNull
@@ -30,10 +28,11 @@ public class Invoice {
     @NotNull
     private float totalPrice;
 
-    @NotNull
+
+    @Column(name="due_date")
     private LocalDateTime dueDate;
     @NotNull
-    private Integer calls_amount;
+    private Integer callsAmount;
 
     @NotNull
     private boolean paid;

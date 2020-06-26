@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDateTime;
-
-
+import java.util.Date;
 
 
 @AllArgsConstructor
@@ -20,7 +19,7 @@ public class CallInfraestructure {
     private  String numberOrigin;
     private  String numberDestination;
     private float duration;
-    private LocalDateTime callDate= LocalDateTime.now();
+    private Date callDate;
 
 
 }

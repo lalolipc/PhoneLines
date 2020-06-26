@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CallRangeDate {
+public class RangeDate {
     private Integer idUser;
     private Date dateFrom;
     private Date dateTo;

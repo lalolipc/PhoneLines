@@ -1,0 +1,28 @@
+3)active phone
+CREATE PROCEDURE sp_activePhone(idPhone int(11))
+BEGIN
+UPDATE phones p set p.active=1 WHERE p.id_phone=idPhone;
+END$$
+
+//desactive phone
+
+CREATE PROCEDURE sp_DesactivePhone(idPhone int(11))
+BEGIN
+UPDATE phones p set p.active=0 WHERE p.id_phone=idPhone;
+END$$
+
+5)
+/*Index*/
+ create index idx_iduserCalls on users(id_user) using HASH.
+ explain:
+explain SELECT * FROM users WHERE id_user=1
+
+/*SP calls by user*/
+CREATE PROCEDURE sp_CallsbyUser(pid_user int(11))
+BEGIN
+SELECT number_origin as numberorigin,city_origin as cityorigin ,number_destination as numberdestination,city_destination as citydestination,duration,date_call as datecall, round(total_price,2) as totalprice,id_user as iduser
+FROM vcalls vc
+WHERE vc.id_user=pid_user;
+END
+$$
+DELIMITER ;

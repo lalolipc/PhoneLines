@@ -3,7 +3,6 @@ package com.utn.PhoneLines.controller;
 
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.User;
-import com.utn.PhoneLines.projection.UserCant;
 import com.utn.PhoneLines.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +35,6 @@ public class UserController {
 
     }
 
-    @GetMapping("/projection")
-    public List<UserCant> getCustomerCant() {
-        return userService.getCustomerCant();
-    }
 
 
 

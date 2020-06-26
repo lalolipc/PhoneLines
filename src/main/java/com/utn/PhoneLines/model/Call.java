@@ -22,11 +22,11 @@ public class Call {
 
     //cuando consultamos una tabla tenga estado de la otra
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_origin_phone")
     private Phone originPhone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_destination_phone")
     private Phone destinationPhone;
 
@@ -34,15 +34,18 @@ public class Call {
     private LocalDateTime dateCall;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_rate")
     private Rate rate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_invoice")
     private Invoice invoice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
     private User user;
 

@@ -5,14 +5,15 @@ import com.utn.PhoneLines.controller.InvoiceController;
 import com.utn.PhoneLines.controller.UserController;
 import com.utn.PhoneLines.exceptions.UserException;
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
-import com.utn.PhoneLines.model.Call;
+import com.utn.PhoneLines.model.City;
 import com.utn.PhoneLines.model.User;
-import com.utn.PhoneLines.model.dto.CallRangeDate;
-import com.utn.PhoneLines.projection.CallUserAndDate;
+import com.utn.PhoneLines.model.dto.RangeDate;
+import com.utn.PhoneLines.projection.CallsClient;
+import com.utn.PhoneLines.projection.CallsClientTop;
+import com.utn.PhoneLines.projection.InvoiceUserAndDate;
 import com.utn.PhoneLines.session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,15 +75,38 @@ public class ApiController {
 
 */
 
-
+    //funciona bien
     @GetMapping( "/calls/between-dates/{startDate}/{finalDate}")
-    public ResponseEntity<List<CallUserAndDate>> getCallsBtwDates(@RequestHeader("Authorization") String sessionToken,
-                                                                  @PathVariable(value = "startDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String startDate,
-                                                                  @PathVariable(value = "finalDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String finalDate)
+    public ResponseEntity<List<CallsClient>> getCallsBtwDates(@RequestHeader("Authorization") String sessionToken,
+                                                              @PathVariable(value = "startDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String startDate,
+                                                              @PathVariable(value = "finalDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String finalDate)
             throws UserException, UserNotExistsException {
 
         User currentUser = getCurrentUser(sessionToken);
-        return this.callController.getCallsOfUserByDate(sessionToken, new CallRangeDate(currentUser.getIdUser(), Date.valueOf(startDate),Date.valueOf(finalDate)));
+        return this.callController.getCallsOfUserByDate(sessionToken, new RangeDate(currentUser.getIdUser(), Date.valueOf(startDate),Date.valueOf(finalDate)));
+
+    }
+
+
+
+    @GetMapping( "/invoices/dates/{startDate}/{finalDate}")
+    public ResponseEntity<List<InvoiceUserAndDate>> getInvoicesBtwDates(@RequestHeader("Authorization") String sessionToken,
+                                                                        @PathVariable(value = "startDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String startDate,
+                                                                        @PathVariable(value = "finalDate", required = true) @DateTimeFormat(pattern = "YYYY-MM-DD") String finalDate)
+            throws UserException, UserNotExistsException {
+
+        User currentUser = getCurrentUser(sessionToken);
+        return this.invoiceController.getInvoicesBtwDates(sessionToken, new RangeDate(currentUser.getIdUser(), Date.valueOf(startDate),Date.valueOf(finalDate)));
+
+    }
+
+//funciona bien
+    @GetMapping( "/calls/top10Destinations")
+    public ResponseEntity<List<CallsClientTop>> getTopDestination(@RequestHeader("Authorization") String sessionToken)
+            throws UserException, UserNotExistsException {
+
+        User currentUser = getCurrentUser(sessionToken);
+        return this.callController.getTopDestination(sessionToken,currentUser);
 
     }
 

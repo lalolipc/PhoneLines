@@ -21,11 +21,17 @@ public class Phone {
 
     @NotNull
     private String number;
-    @NotNull
-    private String phoneType;//debe estar en un enum
+
+   /* @NotNull
+    private Integer id_phone_type;*/
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_phone_type")
+    private PhoneType phoneType;
 
     @OneToMany(mappedBy = "phone")
     private List<Invoice> listInvoices;
+
 
     /*@OneToMany(mappedBy = "phone")
     private List<Call> listCalls;*/

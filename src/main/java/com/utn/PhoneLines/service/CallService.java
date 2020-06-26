@@ -2,14 +2,21 @@ package com.utn.PhoneLines.service;
 
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Call;
+import com.utn.PhoneLines.model.City;
+import com.utn.PhoneLines.model.Invoice;
 import com.utn.PhoneLines.model.dto.CallInfraestructure;
-import com.utn.PhoneLines.model.dto.CallRangeDate;
-import com.utn.PhoneLines.projection.CallUserAndDate;
+import com.utn.PhoneLines.model.dto.RangeDate;
+import com.utn.PhoneLines.projection.CallsClient;
+import com.utn.PhoneLines.projection.CallsClientTop;
 import com.utn.PhoneLines.projection.Infraestructure;
 import com.utn.PhoneLines.repository.CallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class CallService {
@@ -22,10 +29,7 @@ public class CallService {
     }
 
 
-    public List<Call> getAll() {
 
-        return callRepository.findAll();
-    }
     public Call add(Call call) {
 
         return this.callRepository.save(call);
@@ -43,14 +47,27 @@ public class CallService {
     }
 
 
-    public List<CallUserAndDate> getCallsByUserByDate(CallRangeDate callRangeDate) throws UserNotExistsException {
+    public List<CallsClient> getCallsByUserByDate(RangeDate rangeDate) throws UserNotExistsException {
        // User u= userRepository.findById(callUserFilter.getIdUser()).orElseThrow(() -> new UserNotExistsException());
 
-        return callRepository.getReportCallsByUserByDate(callRangeDate.getIdUser(), callRangeDate.getDateFrom(), callRangeDate.getDateTo());
+        return callRepository.getReportCallsByUserByDate(rangeDate.getIdUser(), rangeDate.getDateFrom(), rangeDate.getDateTo());
+    }
+
+    public List<CallsClientTop> getTopDestination(Integer idUser) throws UserNotExistsException{
+
+        return callRepository.getTopCallsbyUser(idUser);
+
+    }
+
+    public List<Call> getCallsByUser(Integer idUser) throws UserNotExistsException{
+
+
+        return callRepository.getCallsByUserBackoffice(idUser);
+
+
+
+
     }
 
 
-    public List<CallUserAndDate> getCallsByUser(Integer idUser) {
-        return callRepository.getCallsByUser(idUser);
-    }
 }
