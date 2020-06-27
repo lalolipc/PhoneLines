@@ -32,4 +32,13 @@ public class InfraestructureController {
         }
     }
 
+    @GetMapping("/")
+    public ResponseEntity<Infraestructure> getTest(@RequestHeader("Authorization") String sessionToken) {
+        try{
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        }catch (Exception ex){
+            throw ex;
+        }
+    }
+
 }
