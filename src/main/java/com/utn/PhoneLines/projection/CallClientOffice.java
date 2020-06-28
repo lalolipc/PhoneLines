@@ -5,12 +5,15 @@ import java.time.LocalDateTime;
 public interface CallClientOffice {
 
     String getNumberorigin();
-    String getNumberdestination();
     String getCitydestination();
-    LocalDateTime getDatecall();
-    Integer getDuration();
-    double getCostprice();
-    double getTotalprice();
-    String getCityDestination();
     String getCityorigin();
+    String getNumberdestination();
+    String getCityDestination();
+    Integer getDuration();
+    LocalDateTime getDatecall();
+    double getTotalprice();
+    double getCostprice();
+    double getSaleprice();
+
+
 }

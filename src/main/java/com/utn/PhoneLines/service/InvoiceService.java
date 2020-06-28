@@ -3,7 +3,6 @@ package com.utn.PhoneLines.service;
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Invoice;
 import com.utn.PhoneLines.model.dto.RangeDate;
-import com.utn.PhoneLines.projection.CallsClient;
 import com.utn.PhoneLines.projection.InvoiceUserAndDate;
 import com.utn.PhoneLines.repository.InvoiceRepository;
 import com.utn.PhoneLines.repository.UserRepository;
@@ -32,15 +31,5 @@ public class InvoiceService {
         return invoiceRepository.getReportInvoicesByUserByDate(rangeDate.getIdUser(), rangeDate.getDateFrom(), rangeDate.getDateTo());
     }
 
-
-    public List<Invoice> findAll() throws UserNotExistsException {
-
-        return invoiceRepository.findAll();
-    }
-/*
-    public List<Invoice> getAll() {
-
-        return invoiceRepository.findAll();
-    }*/
 
 }

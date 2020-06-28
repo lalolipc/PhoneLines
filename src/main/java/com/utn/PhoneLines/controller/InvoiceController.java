@@ -54,11 +54,11 @@ public class InvoiceController {
     }
 
 
-
+/*borrar:
     public ResponseEntity<List<Invoice>> findAll(@RequestHeader("Authorization") String token)throws UserNotExistsException{
 
          List<Invoice> listInvoices = invoiceService.findAll();
         return listInvoices.size()>0 ? ResponseEntity.ok(listInvoices) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
-    }
+    }*/
 }

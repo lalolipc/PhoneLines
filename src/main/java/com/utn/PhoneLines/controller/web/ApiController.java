@@ -3,21 +3,29 @@ package com.utn.PhoneLines.controller.web;
 import com.utn.PhoneLines.controller.CallController;
 import com.utn.PhoneLines.controller.InvoiceController;
 import com.utn.PhoneLines.controller.UserController;
+import com.utn.PhoneLines.exceptions.PhoneNotExistsException;
 import com.utn.PhoneLines.exceptions.UserException;
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
-import com.utn.PhoneLines.model.City;
-import com.utn.PhoneLines.model.User;
+import com.utn.PhoneLines.model.*;
+import com.utn.PhoneLines.model.dto.CallInfraestructure;
 import com.utn.PhoneLines.model.dto.RangeDate;
 import com.utn.PhoneLines.projection.CallsClient;
 import com.utn.PhoneLines.projection.CallsClientTop;
 import com.utn.PhoneLines.projection.InvoiceUserAndDate;
 import com.utn.PhoneLines.session.SessionManager;
+import com.utn.PhoneLines.utils.locationUri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.utn.PhoneLines.exceptions.ValidationException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import java.net.URI;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,22 +63,6 @@ public class ApiController {
 
     }
 
-    @GetMapping("/calls")
-    public ResponseEntity<List<Call>> getCalls(@RequestHeader("Authorization") String sessionToken) throws UserException {
-
-        User currentUser = getCurrentUser(sessionToken);
-
-        return this.callController.getUserCalls(currentUser.getIdUser());
-    }
-
-    @GetMapping("/calls/most-called-places")
-    public ResponseEntity<List<Locality>> getMost(@RequestHeader("Authorization") String sessionToken) throws UserException {
-
-        User currentUser = getCurrentUser(sessionToken);
-
-        return this.callController.getLocalitiesToByCallIdUser(currentUser.getIdUser());
-    }
-
 
 
 */
@@ -100,7 +92,6 @@ public class ApiController {
 
     }
 
-//funciona bien
     @GetMapping( "/calls/top10Destinations")
     public ResponseEntity<List<CallsClientTop>> getTopDestination(@RequestHeader("Authorization") String sessionToken)
             throws UserException, UserNotExistsException {
@@ -110,31 +101,11 @@ public class ApiController {
 
     }
 
-    /*
-
-    @GetMapping("/bills")
-    public ResponseEntity<List<Bill>> getBills(@RequestHeader("Authorization") String sessionToken) throws UserException {
-
-        User currentUser = getCurrentUser(sessionToken);
-
-        return this.billController.getBillsByIdUser(currentUser.getIdUser());
-
-    }
-
-    @GetMapping("/bills/between-dates/{startDate}/{finalDate}")
-    public ResponseEntity<List<Bill>> getBillsBtwDates(@RequestHeader("Authorization") String sessionToken,
-                                                       @PathVariable(value = "startDate", required = true) String startDate,
-                                                       @PathVariable(value = "finalDate", required = true) String finalDate) throws UserException {
-        User currentUser = getCurrentUser(sessionToken);
-
-        return this.billController.getBillsBtwDatesByIdUser( startDate, finalDate, currentUser.getIdUser());
-
-
-    }
-*/
     private User getCurrentUser(String sessionToken) throws UserException {
 
         return Optional.ofNullable(sessionManager.getCurrentUser(sessionToken))
                 .orElseThrow(() -> new UserException("User not Logged"));
     }
+
+
 }

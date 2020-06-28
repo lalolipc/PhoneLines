@@ -16,7 +16,28 @@ import java.io.IOException;
 
 @Component
 public class SessionFilter extends OncePerRequestFilter {
+/*
+    @Autowired
+    private SessionManager sessionManager;
 
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+
+        String sessionToken = request.getHeader("Authorization");
+        Session session = null;
+
+        session = sessionManager.getSession(sessionToken);
+
+        if (null != session) {
+            filterChain.doFilter(request, response);
+        } else {
+            response.setStatus(HttpStatus.FORBIDDEN.value());
+        }
+    }
+
+*/
     @Autowired
     private SessionManager sessionManager;
 

@@ -23,14 +23,18 @@ public class InfrastructureSessionFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String sessionToken = request.getHeader("Authorization");
-
-        if (sessionToken.equals("12345") && request.getRequestURI().equals("/infrastructure/") ){
+//borre && request.getRequestURI().equals("/infrastructure/")
+        if (sessionToken.equals("12345")) {
             filterChain.doFilter(request, response);
-        }
-        else {
+        } else {
 
             response.setStatus(HttpStatus.FORBIDDEN.value());
 
         }
     }
 }
+
+
+
+
+

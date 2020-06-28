@@ -1,18 +1,23 @@
 package com.utn.PhoneLines.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name="calls")
 public class Call {
     @Id
@@ -20,7 +25,8 @@ public class Call {
     @Column(name="id_call")
     private Integer idCall;
 
-    //cuando consultamos una tabla tenga estado de la otra
+
+//cuando consultamos una tabla tenga estado de la otra
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_origin_phone")
@@ -29,10 +35,10 @@ public class Call {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_destination_phone")
     private Phone destinationPhone;
-
     @Column(name="date_call")
-    private LocalDateTime dateCall;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    private Date dateCall;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_rate")
@@ -43,37 +49,26 @@ public class Call {
     private Invoice invoice;
 
 
-
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
     private User user;
 
-    @NotNull
+
     private Integer duration;
-    @NotNull
+
     private double totalPrice;
-    @NotNull
+
     private double costPrice;
-    @NotNull
+
     private double salePrice;
 
-    @NotNull
     private String numberOrigin;
-    @NotNull
+
     private String numberDestination;
-    @NotNull
+
     private String cityOrigin;
-    @NotNull
+
     private String cityDestination;
-
-
-
-
-
-
-
-
 
 
 }

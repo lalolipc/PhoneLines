@@ -1,5 +1,6 @@
 package com.utn.PhoneLines.service;
 
+import com.utn.PhoneLines.exceptions.PhoneNotExistsException;
 import com.utn.PhoneLines.model.Invoice;
 import com.utn.PhoneLines.model.Phone;
 import com.utn.PhoneLines.repository.InvoiceRepository;
@@ -12,7 +13,7 @@ import java.util.List;
 @Service
 public class PhoneService {
 
-    private final PhoneRepository phoneRepository;
+    private PhoneRepository phoneRepository;
 
     @Autowired
     public PhoneService(PhoneRepository phoneRepository) {
@@ -27,4 +28,10 @@ public class PhoneService {
     public void add(Phone phone) {
         phoneRepository.save(phone);
     }
+
+    public Phone getByPhoneNumber(String phoneNumber) {
+
+        return this.phoneRepository.findByNumber(phoneNumber);
+    }
+
 }

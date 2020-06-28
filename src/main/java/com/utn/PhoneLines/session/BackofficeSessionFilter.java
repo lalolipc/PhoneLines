@@ -4,7 +4,6 @@ import com.utn.PhoneLines.model.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -12,12 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-//extends OncePerRequestFilter
-//@Component
-@Service
+@Component
 public class BackofficeSessionFilter extends OncePerRequestFilter {
 
-    @Autowired
+     @Autowired
     private SessionManager sessionManager;
 
     private static final String userTypeBackoffice = "BACKOFFICE";

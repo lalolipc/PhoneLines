@@ -8,6 +8,8 @@ import com.utn.PhoneLines.model.Call;
 import com.utn.PhoneLines.model.Invoice;
 import com.utn.PhoneLines.model.User;
 import com.utn.PhoneLines.model.dto.RangeDate;
+import com.utn.PhoneLines.projection.CallClientOffice;
+import com.utn.PhoneLines.projection.CallsClient;
 import com.utn.PhoneLines.projection.InvoiceUserAndDate;
 import com.utn.PhoneLines.session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,20 +38,20 @@ public class BackofficeController {
 
 
     @GetMapping( "/calls/{idUser}")
-    public ResponseEntity<List<Call>> getCallsByUserBackoffice(@RequestHeader("Authorization") String sessionToken,
-                                                               @PathVariable(value = "idUser", required = true) Integer idUser)
+    public ResponseEntity<List<CallClientOffice>> getCallsByUserBackoffice(@RequestHeader("Authorization") String sessionToken,
+                                                                           @PathVariable(value = "idUser", required = true) Integer idUser)
             throws  UserNotExistsException {
         return this.callController.getCallsByUserBackoffice(sessionToken,idUser);
 
     }
-
+/*Borrar
     @GetMapping( "/invoices/")
     public ResponseEntity<List<Invoice>> findAll(@RequestHeader("Authorization") String sessionToken)
             throws UserException, UserNotExistsException {
 
         return this.invoiceController.findAll(sessionToken);
 
-    }
+    }*/
 
 
     private User getCurrentUser(String sessionToken) throws UserException {
