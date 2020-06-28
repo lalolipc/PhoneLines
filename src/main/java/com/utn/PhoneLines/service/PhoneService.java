@@ -1,9 +1,6 @@
 package com.utn.PhoneLines.service;
 
-import com.utn.PhoneLines.exceptions.PhoneNotExistsException;
-import com.utn.PhoneLines.model.Invoice;
 import com.utn.PhoneLines.model.Phone;
-import com.utn.PhoneLines.repository.InvoiceRepository;
 import com.utn.PhoneLines.repository.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +22,13 @@ public class PhoneService {
 
         return phoneRepository.findAll();
     }
-    public void add(Phone phone) {
-        phoneRepository.save(phone);
+    public Phone add(Phone phone) {
+        return phoneRepository.save(phone);
+    }
+
+    public Phone getById(Integer id) {
+
+        return this.phoneRepository.findById(id);
     }
 
     public Phone getByPhoneNumber(String phoneNumber) {
@@ -34,4 +36,12 @@ public class PhoneService {
         return this.phoneRepository.findByNumber(phoneNumber);
     }
 
+    public void delete(Phone phone) {
+
+        this.phoneRepository.delete(phone);
+    }
+
+    public Phone update(Phone phoneLine) {
+        return this.phoneRepository.save(phoneLine);
+    }
 }
