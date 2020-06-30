@@ -19,8 +19,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query(value = "SELECT * FROM users WHERE user_name= ?1 AND password = ?2", nativeQuery = true)
     User getByUserNameAndPassword(String userName, String password);
 
-    User save(User user);
 
-    @Query(value = "update users u set u.active = false where u.id_user = ?1", nativeQuery = true)
-    void delete(Integer idUser);
 }

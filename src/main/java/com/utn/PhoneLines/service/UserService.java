@@ -19,43 +19,33 @@ import static java.util.Objects.isNull;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-@Autowired
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
 
-    public List<User> getAll(String name) {
-        if(isNull(name))
-        {
-            return userRepository.findAll();
-        }
-        return  userRepository.findByName();
     }
-
-    public User add(User user) {
-        return this.userRepository.save(user);
-    }
+//ok
 
     public User getById(Integer idUser) throws UserNotExistsException {
         return userRepository.findById(idUser).orElseThrow(UserNotExistsException::new);
     }
 
     public void delete(Integer idUser) throws UserNotExistsException {
-        userRepository.delete(idUser);
+
+        userRepository.findById(idUser).orElseThrow(()->new UserNotExistsException());
+        userRepository.deleteById(idUser);
+
     }
 
-    public User update(Integer idUser, UpdateUserDto userDto) throws ValidationException {
+    public User update(Integer idUser, UpdateUserDto userDto) throws UserNotExistsException{
 
-        User old = this.userRepository.findById(idUser).get();
+        User beforeUser = this.userRepository.findById(idUser).get();
+        beforeUser.setName(userDto.getName());
+        beforeUser.setLastName(userDto.getLastName());
+        User user =this.userRepository.save(beforeUser);
 
-        if(!userDto.getUserType().equals(UserTypeEnum.BACKOFFICE.toString())){
-            if(!userDto.getUserType().equals(UserTypeEnum.CLIENT.toString())) {
-                return (User) Optional.ofNullable(null).orElseThrow(() -> new ValidationException("User type is not valid"));
-            }
-        }
-        old.setName(userDto.getName());
-        old.setLastName(userDto.getLastname());
-        return this.userRepository.save(old);
+        return Optional.ofNullable(user).orElseThrow(() -> new UserNotExistsException());
+
     }
 
 
@@ -67,6 +57,7 @@ public class UserService {
             throw new ValidationException("username and password must have a value");
         }
     }
+
 
 
 }

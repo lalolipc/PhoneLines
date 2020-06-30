@@ -5,11 +5,8 @@ import lombok.Data;
 @Data
 public class UpdateUserDto {
 
-    private Integer idLocality;
-
+    private Integer idcity;
     private String name;
-
-    private String lastname;
-
-    private String userType;
+    private String lastName;
+    private String userName;
 }

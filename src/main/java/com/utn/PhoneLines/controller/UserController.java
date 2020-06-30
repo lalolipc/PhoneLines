@@ -19,34 +19,31 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-//si
+    //si
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-
+/*
     public List<User> getAll(@RequestParam(required = false)String name) {
         return userService.getAll(name);
-    }
+    }*/
 
-    public ResponseEntity addUser(@RequestBody final User user) {
-        return ResponseEntity.created(getLocation(this.userService.add(user))).build();
-    }
-
+    //ok
     public ResponseEntity<User> getUserById(Integer idUser) throws UserNotExistsException {
-          return ResponseEntity.ok(userService.getById(idUser));
+        return ResponseEntity.ok(userService.getById(idUser));
     }
-
+    //ok
     public void delete(Integer idUser) throws UserNotExistsException {
         userService.delete(idUser);
     }
-
-    public ResponseEntity<User> update(Integer idUser, UpdateUserDto user) throws ValidationException {
+    //ok
+    public ResponseEntity<User> update(Integer idUser, UpdateUserDto user) throws UserNotExistsException {
         return ResponseEntity.ok(this.userService.update( idUser , user));
     }
 
-
+    //ok powerMock
     private URI getLocation(User user) {
         return ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -55,5 +52,10 @@ public class UserController {
                 .toUri();
     }
 
+//no hacer pero guardar:
+    /*  public ResponseEntity addUser(@RequestBody final User user) {
+        return ResponseEntity.created(getLocation(this.userService.add(user))).build();
+    }
+*/
 
 }

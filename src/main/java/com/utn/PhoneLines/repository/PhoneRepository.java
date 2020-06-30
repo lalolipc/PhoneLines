@@ -10,13 +10,12 @@ import java.util.Optional;
 @Repository
 public interface PhoneRepository extends JpaRepository<Phone,Integer> {
 
+
     @Query(value = "SELECT * FROM phones WHERE number = ?1",nativeQuery = true)
     Phone findByNumber(String phoneNumber);
-
-    Phone save(Phone phone);
-
-    Optional<Phone> findById(Integer id);
-
-    void delete(Phone phone);
+    @Query(value = "SELECT * FROM phones WHERE id_phone = ?1",nativeQuery = true)
+    Phone getById(Integer id);
+   /* @Query(value = "update phones p set p.status = ?2 where p.number = ?1",nativeQuery = true)
+    Phone changeStatusPhone(String phoneNumber, String status);*/
 
 }
