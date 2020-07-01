@@ -102,7 +102,19 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.2</version>
+				<version>0.8.5</version>
+				<configuration>
+					<excludes>
+						<exclude>**/web/**</exclude>
+						<exclude>**/configuration/**</exclude>
+						<exclude>**/model/**</exclude>
+						<exclude>**/exceptions/**</exclude>
+						<exclude>**/projection/**</exclude>
+						<exclude>**/repository/**</exclude>
+						<exclude>**/session/**</exclude>
+						<exclude>**/utils/**</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -124,10 +136,7 @@
 						</goals>
 						<configuration>
 							<excludes>
-								<exclude>*/model/*</exclude>
-								<exclude>*/session/*</exclude>
-								<exclude>*/configuration/*</exclude>
-								<exclude>*/exceptions/*</exclude>
+
 							</excludes>
 							<rules>
 								<rule>
@@ -136,7 +145,7 @@
 										<limit>
 											<counter>INSTRUCTION</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.70</minimum>
+											<minimum>0.7</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -146,7 +155,7 @@
 										<limit>
 											<counter>BRANCH</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.70</minimum>
+											<minimum>0.07</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -155,12 +164,17 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
-
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>3.0.0-M3</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 
