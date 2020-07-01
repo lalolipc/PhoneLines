@@ -25,22 +25,26 @@ public class UserController {
         this.userService = userService;
     }
 
-/*
-    public List<User> getAll(@RequestParam(required = false)String name) {
-        return userService.getAll(name);
-    }*/
-
     //ok
     public ResponseEntity<User> getUserById(Integer idUser) throws UserNotExistsException {
         return ResponseEntity.ok(userService.getById(idUser));
     }
+
     //ok
     public void delete(Integer idUser) throws UserNotExistsException {
         userService.delete(idUser);
     }
     //ok
-    public ResponseEntity<User> update(Integer idUser, UpdateUserDto user) throws UserNotExistsException {
+    public ResponseEntity<User> update(Integer idUser, UpdateUserDto user) throws ValidationException {
         return ResponseEntity.ok(this.userService.update( idUser , user));
+    }
+
+    public List<User> getAll(@RequestParam(required = false)String name) {
+        return userService.getAll(name);
+    }
+
+    public ResponseEntity addUser(@RequestBody final User user) {
+        return ResponseEntity.created(getLocation(this.userService.add(user))).build();
     }
 
     //ok powerMock
@@ -51,11 +55,5 @@ public class UserController {
                 .buildAndExpand(user.getIdUser())
                 .toUri();
     }
-
-//no hacer pero guardar:
-    /*  public ResponseEntity addUser(@RequestBody final User user) {
-        return ResponseEntity.created(getLocation(this.userService.add(user))).build();
-    }
-*/
 
 }
