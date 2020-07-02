@@ -88,7 +88,7 @@ public class ApiController {
             throws UserException, UserNotExistsException {
 
         User currentUser = getCurrentUser(sessionToken);
-        return this.invoiceController.getInvoicesBtwDates(sessionToken, new RangeDate(currentUser.getIdUser(), Date.valueOf(startDate),Date.valueOf(finalDate)));
+        return this.invoiceController.getInvoicesBtwDates(new RangeDate(currentUser.getIdUser(), Date.valueOf(startDate),Date.valueOf(finalDate)));
 
     }
 

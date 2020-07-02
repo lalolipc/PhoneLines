@@ -58,6 +58,18 @@ public class UserService {
         }
     }
 
+    public List<User> getAll(String name) {
+        if(isNull(name))
+        {
+            return userRepository.findAll();
+        }
+        return  userRepository.findByName();
+    }
+
+    public User add(User user) {
+        return this.userRepository.save(user);
+    }
+
 
 
 }

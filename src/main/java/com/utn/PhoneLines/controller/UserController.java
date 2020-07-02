@@ -35,7 +35,7 @@ public class UserController {
         userService.delete(idUser);
     }
     //ok
-    public ResponseEntity<User> update(Integer idUser, UpdateUserDto user) throws ValidationException {
+    public ResponseEntity<User> update(Integer idUser, UpdateUserDto user) throws ValidationException, UserNotExistsException {
         return ResponseEntity.ok(this.userService.update( idUser , user));
     }
 

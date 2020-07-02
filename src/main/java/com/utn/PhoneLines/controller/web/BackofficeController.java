@@ -79,7 +79,7 @@ public class BackofficeController {
     @PutMapping("/users/{idUser}")
     public ResponseEntity<User> updateClient(@RequestHeader("Authorization") String sessionToken,
                                              @PathVariable(value = "idUser", required = true) Integer idUser,
-                                             @RequestBody UpdateUserDto updateUserDto) throws UserException, UserNotExistsException {
+                                             @RequestBody UpdateUserDto updateUserDto) throws ValidationException, UserNotExistsException, UserException {
         getCurrentUser(sessionToken);
 
         return this.userController.update(idUser, updateUserDto);

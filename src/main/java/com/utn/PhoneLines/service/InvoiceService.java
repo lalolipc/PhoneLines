@@ -7,6 +7,8 @@ import com.utn.PhoneLines.projection.InvoiceUserAndDate;
 import com.utn.PhoneLines.repository.InvoiceRepository;
 import com.utn.PhoneLines.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +17,12 @@ import java.util.List;
 public class InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public InvoiceService(InvoiceRepository invoiceRepository) {
+    public InvoiceService(InvoiceRepository invoiceRepository, UserRepository userRepository) {
         this.invoiceRepository = invoiceRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -27,9 +30,19 @@ public class InvoiceService {
         invoiceRepository.save(invoice);
     }
 
-    public List<InvoiceUserAndDate> getInvoicesByUserByDate(RangeDate rangeDate) throws UserNotExistsException{
-        return invoiceRepository.getReportInvoicesByUserByDate(rangeDate.getIdUser(), rangeDate.getDateFrom(), rangeDate.getDateTo());
-    }
+    public ResponseEntity<List<InvoiceUserAndDate>> getInvoicesByUserByDate(RangeDate rangeDate) throws UserNotExistsException {
+        if(this.userRepository.getById(rangeDate.getIdUser())==null){
+            throw new UserNotExistsException();
+        }
+        List<InvoiceUserAndDate> bills = invoiceRepository.getReportInvoicesByUserByDate(rangeDate.getIdUser(), rangeDate.getDateFrom(), rangeDate.getDateTo());
 
+        if (!bills.isEmpty()) {
+            return ResponseEntity.ok(bills);
+
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+        }
+    }
 
 }

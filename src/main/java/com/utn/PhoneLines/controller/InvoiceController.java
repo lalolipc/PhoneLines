@@ -45,11 +45,9 @@ public class InvoiceController {
 
     }*/
 
-    public ResponseEntity<List<InvoiceUserAndDate>> getInvoicesBtwDates(@RequestHeader("Authorization") String sessionToken, @RequestBody RangeDate rangeDate) throws UserNotExistsException {
-        User currentUser = sessionManager.getCurrentUser(sessionToken);
-        rangeDate.setIdUser(currentUser.getIdUser());
+    public ResponseEntity<List<InvoiceUserAndDate>> getInvoicesBtwDates(RangeDate rangeDate) throws UserNotExistsException {
 
-        List<InvoiceUserAndDate> listInvoices = invoiceService.getInvoicesByUserByDate(rangeDate);
+        List<InvoiceUserAndDate> listInvoices = invoiceService.getInvoicesByUserByDate(rangeDate).getBody();
         return listInvoices.size()>0 ? ResponseEntity.ok(listInvoices) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
