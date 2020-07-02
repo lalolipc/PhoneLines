@@ -22,7 +22,7 @@ public class RateController {
             this.rateService = rateService;
         }
 
-        @GetMapping("/")
+    /*    @GetMapping("/")
         public List<Rate> getAll()
         {
             return rateService.getAll();
@@ -33,7 +33,7 @@ public class RateController {
         public void addRate(@RequestBody final Rate rate){
             rateService.add(rate);
 
-        }
+        }*/
 
     public ResponseEntity<List<Rate>> getRates() {
         return rateService.getRates();

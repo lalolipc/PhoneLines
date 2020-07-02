@@ -20,7 +20,7 @@ public class StateController {
         this.stateService = stateService;
     }
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public List<State> getAll()
     {
         return stateService.getAll();
@@ -31,5 +31,5 @@ public class StateController {
     public void addState(@RequestBody final State state){
         stateService.add(state);
 
-    }
+    }*/
 }

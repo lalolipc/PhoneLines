@@ -38,10 +38,6 @@ public class UserService {
 
         userRepository.delete(idUser);
 
-
-
-
-
     }
 
     public User update(Integer idUser, UpdateUserDto userDto) throws UserNotExistsException {

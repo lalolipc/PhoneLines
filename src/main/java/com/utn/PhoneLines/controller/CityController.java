@@ -17,7 +17,7 @@ public class CityController {
     public CityController(CityService cityService) {
         this.cityService = cityService;
     }
-
+/*
     @GetMapping("/")
     public List<City> getAll()
     {
@@ -29,7 +29,7 @@ public class CityController {
     public void addCity(@RequestBody final City city){
         cityService.add(city);
 
-    }
+    }*/
 
 
 }

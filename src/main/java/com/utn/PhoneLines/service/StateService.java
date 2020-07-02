@@ -17,12 +17,12 @@ public class StateService {
         this.stateRepository = stateRepository;
     }
 
-
+/*
     public List<State> getAll() {
 
         return stateRepository.findAll();
     }
     public void add(State state) {
         stateRepository.save(state);
-    }
+    }*/
 }
