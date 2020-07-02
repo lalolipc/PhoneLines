@@ -4,7 +4,9 @@ import com.utn.PhoneLines.exceptions.PhoneNotExistsException;
 import com.utn.PhoneLines.exceptions.ResourceNotExistException;
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Call;
+import com.utn.PhoneLines.model.Rate;
 import com.utn.PhoneLines.model.User;
+import com.utn.PhoneLines.model.dto.CallInfraestructure;
 import com.utn.PhoneLines.model.dto.RangeDate;
 import com.utn.PhoneLines.projection.CallClientOffice;
 import com.utn.PhoneLines.projection.CallsClient;
@@ -196,13 +198,14 @@ public class CallControllerTest {
         ResponseEntity<List<CallClientOffice>> response = this.controller.getCallsByUserBackoffice(idUser);
         Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
     }
-/*
+
     @Test
-    public void addCallTest() throws PhoneNotExistsException, ParseException{
-        CallClientOffice call = createCallClientOffice();
-        when(this.service.addCall(call)).thenReturn(ResponseEntity.ok(call));
-        ResponseEntity<Call> response = this.controller.addCall(call);
+    public void addCallTest() throws PhoneNotExistsException, ParseException {
+        CallInfraestructure r = new CallInfraestructure();
+        Call c = new Call();
+        when(this.service.addCall(r)).thenReturn(c);
+        ResponseEntity<Call> response = ResponseEntity.ok(this.service.addCall(r));
         Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
-    }*/
+    }
 
 }
