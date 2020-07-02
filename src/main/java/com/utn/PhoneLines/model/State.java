@@ -27,4 +27,5 @@ public class State {
     @OneToMany(fetch=FetchType.LAZY, mappedBy="state", cascade=CascadeType.ALL)
     @JsonBackReference(value="listCities")
     private List<City> listCities;
+
 }

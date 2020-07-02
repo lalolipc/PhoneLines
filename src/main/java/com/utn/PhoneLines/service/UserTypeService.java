@@ -11,7 +11,5 @@ public class UserTypeService {
 
     @Autowired
 
-    public UserTypeService(UserTypeRepository userTypeRepository) {
-        this.userTypeRepository = userTypeRepository;
-    }
+    public UserTypeService(UserTypeRepository userTypeRepository) {       this.userTypeRepository = userTypeRepository;    }
 }

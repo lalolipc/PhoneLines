@@ -1,21 +1,14 @@
 package com.utn.PhoneLines.controller.web;
 
-import com.utn.PhoneLines.controller.CallController;
-import com.utn.PhoneLines.controller.InvoiceController;
-import com.utn.PhoneLines.controller.PhoneController;
-import com.utn.PhoneLines.controller.UserController;
+import com.utn.PhoneLines.controller.*;
 import com.utn.PhoneLines.exceptions.*;
-import com.utn.PhoneLines.model.Call;
-import com.utn.PhoneLines.model.Invoice;
-import com.utn.PhoneLines.model.Phone;
-import com.utn.PhoneLines.model.User;
+import com.utn.PhoneLines.model.*;
 import com.utn.PhoneLines.model.dto.PhoneDto;
 import com.utn.PhoneLines.model.dto.RangeDate;
 import com.utn.PhoneLines.model.dto.UpdatePhoneDto;
 import com.utn.PhoneLines.model.dto.UpdateUserDto;
 import com.utn.PhoneLines.projection.CallClientOffice;
-import com.utn.PhoneLines.projection.CallsClient;
-import com.utn.PhoneLines.projection.InvoiceUserAndDate;
+import com.utn.PhoneLines.exceptions.ValidationException;
 import com.utn.PhoneLines.session.SessionManager;
 import com.utn.PhoneLines.utils.locationUri;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,22 +31,25 @@ public class BackofficeController {
     InvoiceController invoiceController;
     UserController userController;
     PhoneController phoneController;
-
+    RateController rateController;
     @Autowired
-    public BackofficeController(CallController callController, SessionManager sessionManager, InvoiceController invoiceController, UserController userController, PhoneController phoneController) {
+    public BackofficeController(CallController callController, SessionManager sessionManager, InvoiceController invoiceController, UserController userController, PhoneController phoneController, RateController rateController) {
         this.callController = callController;
         this.sessionManager = sessionManager;
         this.invoiceController = invoiceController;
         this.userController = userController;
         this.phoneController = phoneController;
+        this.rateController = rateController;
     }
+
+
 
     //ok
     @GetMapping( "/calls/{idUser}")
     public ResponseEntity<List<CallClientOffice>> getCallsByUserBackoffice(@RequestHeader("Authorization") String sessionToken,
                                                                            @PathVariable(value = "idUser", required = true) Integer idUser)
             throws  UserNotExistsException {
-        return this.callController.getCallsByUserBackoffice(sessionToken,idUser);
+        return this.callController.getCallsByUserBackoffice(idUser);
 
     }
 
@@ -79,7 +75,7 @@ public class BackofficeController {
     @PutMapping("/users/{idUser}")
     public ResponseEntity<User> updateClient(@RequestHeader("Authorization") String sessionToken,
                                              @PathVariable(value = "idUser", required = true) Integer idUser,
-                                             @RequestBody UpdateUserDto updateUserDto) throws ValidationException, UserNotExistsException, UserException {
+                                             @RequestBody UpdateUserDto updateUserDto) throws UserException,UserNotExistsException {
         getCurrentUser(sessionToken);
 
         return this.userController.update(idUser, updateUserDto);
@@ -144,6 +140,23 @@ public class BackofficeController {
         return Optional.ofNullable(sessionManager.getCurrentUser(sessionToken))
                 .orElseThrow(() -> new UserException("User not Logged"));
     }
+
+    @GetMapping("/rates")
+    public ResponseEntity<List<Rate>> getRates(@RequestHeader("Authorization") String sessionToken) throws UserException {
+        getCurrentUser(sessionToken);
+
+        return this.rateController.getRates();
+    }
+
+    @GetMapping("/Rates/from={idCityFrom}/to={idCityTo}")
+    public ResponseEntity<Rate> getRatesbyCity(@RequestHeader("Authorization") String sessionToken,
+                                            @PathVariable(value = "idCityFrom", required = true) Integer idCityFrom,
+                                            @PathVariable(value = "idCityTo", required = true) Integer idCityTo) throws UserException, ResourceNotExistException {
+        getCurrentUser(sessionToken);
+
+        return this.rateController.getRatesbyCity(idCityFrom, idCityTo);
+    }
+
 
 //nohacer pero guardar
     /*

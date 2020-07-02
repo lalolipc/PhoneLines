@@ -27,24 +27,30 @@ public class UserService {
 //ok
 
     public User getById(Integer idUser) throws UserNotExistsException {
-        return userRepository.findById(idUser).orElseThrow(UserNotExistsException::new);
+       // return userRepository.findById(idUser).orElseThrow(UserNotExistsException::new);
+        User user = this.userRepository.getById(idUser);
+
+        return Optional.ofNullable(user).orElseThrow(() -> new UserNotExistsException());
     }
 
     public void delete(Integer idUser) throws UserNotExistsException {
 
-        userRepository.findById(idUser).orElseThrow(()->new UserNotExistsException());
-        userRepository.deleteById(idUser);
+
+        userRepository.delete(idUser);
+
+
+
+
 
     }
 
-    public User update(Integer idUser, UpdateUserDto userDto) throws UserNotExistsException{
+    public User update(Integer idUser, UpdateUserDto userDto) throws UserNotExistsException {
 
         User beforeUser = this.userRepository.findById(idUser).get();
         beforeUser.setName(userDto.getName());
         beforeUser.setLastName(userDto.getLastName());
-        User user =this.userRepository.save(beforeUser);
+       return this.userRepository.save(beforeUser);
 
-        return Optional.ofNullable(user).orElseThrow(() -> new UserNotExistsException());
 
     }
 
@@ -57,7 +63,7 @@ public class UserService {
             throw new ValidationException("username and password must have a value");
         }
     }
-
+/*
     public List<User> getAll(String name) {
         if(isNull(name))
         {
@@ -65,11 +71,13 @@ public class UserService {
         }
         return  userRepository.findByName();
     }
+    */
 
+/*
     public User add(User user) {
         return this.userRepository.save(user);
     }
-
+*/
 
 
 }

@@ -47,8 +47,8 @@ public class InvoiceController {
 
     public ResponseEntity<List<InvoiceUserAndDate>> getInvoicesBtwDates(RangeDate rangeDate) throws UserNotExistsException {
 
-        List<InvoiceUserAndDate> listInvoices = invoiceService.getInvoicesByUserByDate(rangeDate).getBody();
-        return listInvoices.size()>0 ? ResponseEntity.ok(listInvoices) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return invoiceService.getInvoicesByUserByDate(rangeDate);
+        //return listInvoices.size()>0 ? ResponseEntity.ok(listInvoices) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 

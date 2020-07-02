@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class NewUserDTO {
 
-    private Integer idLocality;
+    private Integer idCity;
 
     private String name;
 
