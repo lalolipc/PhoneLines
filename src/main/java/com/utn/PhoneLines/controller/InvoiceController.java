@@ -1,5 +1,6 @@
 package com.utn.PhoneLines.controller;
 
+import com.utn.PhoneLines.exceptions.UserException;
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Call;
 import com.utn.PhoneLines.model.Invoice;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 //@Controller
 @RestController
@@ -52,11 +54,17 @@ public class InvoiceController {
     }
 
 
-/*borrar:
-    public ResponseEntity<List<Invoice>> findAll(@RequestHeader("Authorization") String token)throws UserNotExistsException{
 
-         List<Invoice> listInvoices = invoiceService.findAll();
-        return listInvoices.size()>0 ? ResponseEntity.ok(listInvoices) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    public ResponseEntity<List<Invoice>> findAll(Integer id) throws UserNotExistsException, UserException {
 
-    }*/
+        ResponseEntity<List<Invoice>> listInvoices = invoiceService.getBillsByIdUser(id);
+        return listInvoices.getBody().size()>0 ? listInvoices : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    }
+
+    private User getCurrentUser(String sessionToken) throws UserException {
+
+        return Optional.ofNullable(sessionManager.getCurrentUser(sessionToken))
+                .orElseThrow(() -> new UserException("User not Logged"));
+    }
 }

@@ -1,7 +1,9 @@
 package com.utn.PhoneLines.service;
 
+import com.utn.PhoneLines.exceptions.UserException;
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Invoice;
+import com.utn.PhoneLines.model.User;
 import com.utn.PhoneLines.model.dto.RangeDate;
 import com.utn.PhoneLines.projection.InvoiceUserAndDate;
 import com.utn.PhoneLines.repository.InvoiceRepository;
@@ -11,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InvoiceService {
@@ -44,5 +48,22 @@ public class InvoiceService {
 
         }
     }
+
+    public ResponseEntity<List<Invoice>> getBillsByIdUser(Integer idUser) throws UserException {
+
+        User u = new User();
+        if((u = this.userRepository.getById(idUser)) == null){
+            return (ResponseEntity<List<Invoice>>) Optional.ofNullable(null).orElseThrow(() -> new UserException("User not exists"));
+        }
+        List<Invoice> bills = new ArrayList<>();
+        bills = this.invoiceRepository.getInvoicesByIdUser(idUser);
+        if (!bills.isEmpty()) {
+            return ResponseEntity.ok(bills);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+    }
+
+
 
 }

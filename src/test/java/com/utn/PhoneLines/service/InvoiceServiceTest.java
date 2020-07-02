@@ -108,6 +108,19 @@ public class InvoiceServiceTest {
     }
 
     @Test
+    public void getBillsByIdUserOkTest() throws UserException, ParseException, UserNotExistsException {
+        Integer id = 1;
+        User u = createUser();
+        List<Invoice> list = new ArrayList<>();
+        Invoice bill = createInvoice();
+        list.add(bill);
+        when(this.userRepository.getById(id)).thenReturn(u);
+        when(this.invoiceRepository.getInvoicesByIdUser(id)).thenReturn(list);
+        ResponseEntity<List<Invoice>> response = this.invoiceService.getBillsByIdUser(id);
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+    @Test
     public void getInvoicesBtwDatesByIdUserOkTest() throws UserException, ParseException, UserNotExistsException {
         String startDate = "2020-01-01";
         String finalDate = "2020-01-31";
