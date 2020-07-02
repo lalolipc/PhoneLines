@@ -37,23 +37,20 @@ public class CallController {
 
 
     //le saque el requestbody que decia de range
-    public  ResponseEntity<List<CallsClient>> getCallsOfUserByDate(@RequestHeader("Authorization") String token, RangeDate rangeDate) throws UserNotExistsException {
-        User currentUser = sessionManager.getCurrentUser(token);
-        rangeDate.setIdUser(currentUser.getIdUser());
-
+    public  ResponseEntity<List<CallsClient>> getCallsOfUserByDate(RangeDate rangeDate) throws UserNotExistsException {
         List<CallsClient> listtCalls = callService.getCallsByUserByDate(rangeDate);
         return listtCalls.size()>0 ? ResponseEntity.ok(listtCalls) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
     }
 //le saque el requestbody que decia de user
-    public ResponseEntity<List<CallsClientTop>> getTopDestination(@RequestHeader("Authorization") String token,User currentUser)throws UserNotExistsException {
+    public ResponseEntity<List<CallsClientTop>> getTopDestination(User currentUser)throws UserNotExistsException {
 
 
         List<CallsClientTop> listtCalls =  callService.getTopDestination(currentUser.getIdUser());
         return listtCalls.size()>0 ? ResponseEntity.ok(listtCalls) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    public ResponseEntity<List<CallClientOffice>> getCallsByUserBackoffice(@RequestHeader("Authorization") String token, Integer idUser) throws UserNotExistsException{
+    public ResponseEntity<List<CallClientOffice>> getCallsByUserBackoffice(Integer idUser) throws UserNotExistsException{
 
         List<CallClientOffice> listtCalls = callService.getCallsByUser(idUser);
         return listtCalls.size()>0 ? ResponseEntity.ok(listtCalls) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();

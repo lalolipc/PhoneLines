@@ -53,19 +53,7 @@ public class ApiController {
         return ResponseEntity.ok(currentUser);
 
     }
-/*
-    @PutMapping("/info")
-    public ResponseEntity<User> update(@RequestHeader("Authorization") String sessionToken,
-                                       @RequestBody LoginRequestDto client) throws UserException, ValidationException{
-        User currentUser = getCurrentUser(sessionToken);
 
-        return  this.userController.update(currentUser.getIdUser(), client);
-
-    }
-
-
-
-*/
 
     //funciona bien
     @GetMapping( "/calls/between-dates/{startDate}/{finalDate}")
@@ -75,7 +63,7 @@ public class ApiController {
             throws UserException, UserNotExistsException {
 
         User currentUser = getCurrentUser(sessionToken);
-        return this.callController.getCallsOfUserByDate(sessionToken, new RangeDate(currentUser.getIdUser(), Date.valueOf(startDate),Date.valueOf(finalDate)));
+        return this.callController.getCallsOfUserByDate(new RangeDate(currentUser.getIdUser(), Date.valueOf(startDate),Date.valueOf(finalDate)));
 
     }
 
@@ -97,7 +85,7 @@ public class ApiController {
             throws UserException, UserNotExistsException {
 
         User currentUser = getCurrentUser(sessionToken);
-        return this.callController.getTopDestination(sessionToken,currentUser);
+        return this.callController.getTopDestination(currentUser);
 
     }
 
