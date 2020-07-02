@@ -26,12 +26,6 @@ public class CallService {
         this.phoneService = phoneService;
     }
 
-    public Call add(Call call) {
-
-        return this.callRepository.save(call);
-    }
-
-
     public List<CallsClient> getCallsByUserByDate(RangeDate rangeDate) throws UserNotExistsException {
 
         return callRepository.getReportCallsByUserByDate(rangeDate.getIdUser(), rangeDate.getDateFrom(), rangeDate.getDateTo());
@@ -44,10 +38,7 @@ public class CallService {
     }
 
     public List<CallClientOffice> getCallsByUser(Integer idUser) throws UserNotExistsException {
-
-
         return callRepository.getCallsByUserBackoffice(idUser);
-
     }
 
     public Call addCall(CallInfraestructure callInfra) throws PhoneNotExistsException, ParseException {
