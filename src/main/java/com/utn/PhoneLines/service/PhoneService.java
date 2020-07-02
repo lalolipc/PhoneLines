@@ -67,11 +67,11 @@ public class PhoneService {
         return this.phoneRepository.findByNumber(phoneNumber);
     }
 
-    public void delete(Integer idPhone) throws PhoneNotExistsException {
+    public Integer delete(Integer idPhone) throws PhoneNotExistsException {
 
         Phone search = phoneRepository.getById(idPhone);
         this.phoneRepository.deleteById(idPhone);
-
+        return idPhone;
 
     }
 
