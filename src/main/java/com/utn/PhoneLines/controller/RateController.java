@@ -22,18 +22,7 @@ public class RateController {
             this.rateService = rateService;
         }
 
-    /*    @GetMapping("/")
-        public List<Rate> getAll()
-        {
-            return rateService.getAll();
-        }
 
-
-        @PostMapping("/")
-        public void addRate(@RequestBody final Rate rate){
-            rateService.add(rate);
-
-        }*/
 
     public ResponseEntity<List<Rate>> getRates() {
         return rateService.getRates();

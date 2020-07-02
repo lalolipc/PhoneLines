@@ -4,7 +4,6 @@ import com.utn.PhoneLines.controller.*;
 import com.utn.PhoneLines.exceptions.*;
 import com.utn.PhoneLines.model.*;
 import com.utn.PhoneLines.model.dto.PhoneDto;
-import com.utn.PhoneLines.model.dto.RangeDate;
 import com.utn.PhoneLines.model.dto.UpdatePhoneDto;
 import com.utn.PhoneLines.model.dto.UpdateUserDto;
 import com.utn.PhoneLines.projection.CallClientOffice;
@@ -12,13 +11,11 @@ import com.utn.PhoneLines.exceptions.ValidationException;
 import com.utn.PhoneLines.session.SessionManager;
 import com.utn.PhoneLines.utils.locationUri;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,17 +77,6 @@ public class BackofficeController {
 
         return this.userController.update(idUser, updateUserDto);
     }
-
-
-    /*
-        @PutMapping("/users/{idUser}")
-    public ResponseEntity<User> updateClient(@RequestHeader("Authorization") String sessionToken,
-                                             @PathVariable(value = "idUser", required = true) Integer idUser,
-                                             @RequestBody UpdateUserDto updateUserDto) throws ValidationException, UserException, javax.xml.bind.ValidationException {
-        getCurrentUser(sessionToken);
-
-        return this.userController.update(idUser, updateUserDto);
-    }*/
 
     //ALTA, BAJA y SUSPENCION DE LINEAS
 //ok

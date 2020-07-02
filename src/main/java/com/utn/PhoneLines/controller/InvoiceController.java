@@ -33,24 +33,10 @@ public class InvoiceController {
     }
 
 
-  /*
-    @GetMapping("/")
-    public List<Invoice> getAll()
-    {
-        return invoiceService.getAll();
-    }
-
-
-    @PostMapping("/")
-    public void addInvoice(@RequestBody final Invoice invoice){
-        invoiceService.add(invoice);
-
-    }*/
-
     public ResponseEntity<List<InvoiceUserAndDate>> getInvoicesBtwDates(RangeDate rangeDate) throws UserNotExistsException {
 
         return invoiceService.getInvoicesByUserByDate(rangeDate);
-        //return listInvoices.size()>0 ? ResponseEntity.ok(listInvoices) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
     }
 
 

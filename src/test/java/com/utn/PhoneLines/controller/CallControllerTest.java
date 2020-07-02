@@ -1,5 +1,6 @@
 package com.utn.PhoneLines.controller;
 
+import com.utn.PhoneLines.exceptions.PhoneNotExistsException;
 import com.utn.PhoneLines.exceptions.ResourceNotExistException;
 import com.utn.PhoneLines.exceptions.UserNotExistsException;
 import com.utn.PhoneLines.model.Call;
@@ -195,5 +196,13 @@ public class CallControllerTest {
         ResponseEntity<List<CallClientOffice>> response = this.controller.getCallsByUserBackoffice(idUser);
         Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
     }
+/*
+    @Test
+    public void addCallTest() throws PhoneNotExistsException, ParseException{
+        CallClientOffice call = createCallClientOffice();
+        when(this.service.addCall(call)).thenReturn(ResponseEntity.ok(call));
+        ResponseEntity<Call> response = this.controller.addCall(call);
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+    }*/
 
 }

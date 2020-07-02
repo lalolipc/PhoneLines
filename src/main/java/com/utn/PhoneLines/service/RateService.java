@@ -23,11 +23,6 @@ public class RateService {
         this.rateRepository = rateRepository;
     }
 
-
-    public List<Rate> getAll() {
-
-        return rateRepository.findAll();
-    }
     public Rate add(Rate rate) {
         return rateRepository.save(rate);
     }

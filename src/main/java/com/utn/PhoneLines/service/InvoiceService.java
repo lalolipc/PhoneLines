@@ -30,10 +30,6 @@ public class InvoiceService {
     }
 
 
-  /*  public void add(Invoice invoice) {
-        invoiceRepository.save(invoice);
-    }*/
-
     public ResponseEntity<List<InvoiceUserAndDate>> getInvoicesByUserByDate(RangeDate rangeDate) throws UserNotExistsException {
         if(this.userRepository.getById(rangeDate.getIdUser())==null){
             throw new UserNotExistsException();
