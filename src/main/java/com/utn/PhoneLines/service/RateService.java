@@ -28,8 +28,8 @@ public class RateService {
 
         return rateRepository.findAll();
     }
-    public void add(Rate rate) {
-        rateRepository.save(rate);
+    public Rate add(Rate rate) {
+        return rateRepository.save(rate);
     }
 
     public ResponseEntity<List<Rate>> getRates() {

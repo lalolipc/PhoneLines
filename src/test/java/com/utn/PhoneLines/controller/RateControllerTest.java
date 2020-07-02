@@ -1,5 +1,6 @@
 package com.utn.PhoneLines.controller;
 
+import com.utn.PhoneLines.exceptions.ResourceNotExistException;
 import com.utn.PhoneLines.model.City;
 import com.utn.PhoneLines.model.Rate;
 import com.utn.PhoneLines.service.RateService;
@@ -43,6 +44,17 @@ public class RateControllerTest {
         when(this.rateServiceMock.getRates()).thenReturn(ResponseEntity.ok(list));
         ResponseEntity<List<Rate>> response = this.rateController.getRates();
         Assert.assertEquals(list.size(),response.getBody().size());
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+
+    @Test
+    public void getRatesbyCityOkTest() throws ResourceNotExistException {
+        Integer idCityFrom = 1;
+        Integer idCityTo = 2;
+        Rate r = createRate();
+        when(this.rateServiceMock.getRatesbyCity(idCityFrom, idCityTo)).thenReturn(r);
+        ResponseEntity<Rate> response = this.rateController.getRatesbyCity(idCityFrom, idCityTo);
         Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
     }
 

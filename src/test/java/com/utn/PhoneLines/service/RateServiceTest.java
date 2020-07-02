@@ -1,8 +1,12 @@
 package com.utn.PhoneLines.service;
 
+import com.utn.PhoneLines.exceptions.PhoneNotExistsException;
 import com.utn.PhoneLines.exceptions.ResourceNotExistException;
+import com.utn.PhoneLines.model.Call;
 import com.utn.PhoneLines.model.City;
+import com.utn.PhoneLines.model.Phone;
 import com.utn.PhoneLines.model.Rate;
+import com.utn.PhoneLines.model.dto.CallInfraestructure;
 import com.utn.PhoneLines.repository.RateRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,8 +16,10 @@ import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -52,14 +58,25 @@ public class RateServiceTest {
         Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
     }
 
-  /*  @Test
-    public void getTariffsNoContentTest(){
-        List<Tariff> list = new ArrayList<>();
-        when(this.rateRepository.findAll()).thenReturn(list);
-        ResponseEntity<List<Tariff>> response = this.tariffService.getTariffs();
-        Assert.assertEquals(HttpStatus.NO_CONTENT,response.getStatusCode());
+    @Test
+    public void getRatesbyCityOkTest() throws ResourceNotExistException {
+        Integer idCityFrom = 1;
+        Integer idCityTo = 2;
+        Rate r = createRate();
+        when(this.rateRepository.getRatesbyCity(idCityFrom, idCityTo)).thenReturn(r);
+        ResponseEntity<Rate> response = ResponseEntity.ok(this.rateService.getRatesbyCity(idCityFrom, idCityTo));
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
     }
-*/
+
+    @Test
+    public void addRateOkTest() {
+        Rate r = createRate();
+        when(this.rateRepository.save(r)).thenReturn(r);
+        ResponseEntity<Rate> response = ResponseEntity.ok(this.rateService.add(r));
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+
     @Test
     public void getTariffByLocalityFromToOkTest() throws ResourceNotExistException {
         Rate r = createRate();
@@ -68,13 +85,5 @@ public class RateServiceTest {
         when(this.rateRepository.getRatesbyCity(icCityFrom,idCityTo)).thenReturn(r);
         Assert.assertEquals(r,this.rateService.getRatesbyCity(icCityFrom,idCityTo));
     }
-/*
-    @Test(expected = TariffNotExistsException.class)
-    public void getTariffByLocalityFromToEmptyTariffTest() throws TariffNotExistsException {
-        Integer idLocalityFrom = 1;
-        Integer idLocalityTo = 1;
-        when(this.rateRepository.getTariffByLocalityFromTo(idLocalityFrom,idLocalityTo)).thenReturn(null);
-        this.tariffService.getTariffByLocalityFromTo(idLocalityFrom,idLocalityTo);
-    }
-*/
+
 }
