@@ -15,12 +15,6 @@ public interface PhoneRepository extends JpaRepository<Phone,Integer> {
     Phone findByNumber(String phoneNumber);
 
     @Query(value = "SELECT * FROM phones WHERE id_phone = ?1",nativeQuery = true)
-    Phone getById(Integer id);/*
-
-    Phone save(Phone phone);
-
-    Phone findById(long id);
-
-    void delete(Phone phone);*/
+    Phone getById(Integer id);
 
 }

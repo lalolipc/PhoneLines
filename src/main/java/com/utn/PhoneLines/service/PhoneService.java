@@ -36,13 +36,7 @@ public class PhoneService {
 
         Phone p = phoneRepository.findByNumber(phonedto.getNumber());
         Integer idTypePhone = phonedto.getIdPhoneType();
-     /*   try {
-            if (p.getIdPhone() != null) {
-                throw new PhoneAlreadyExistException("the Phone already exists");
-            }
-            if (idTypePhone == 1 || idTypePhone == 2) {
-             throw new ValidationException("the Phone already exists");
-*/
+
         User u = userRepository.getById(phonedto.getIdUser());
         PhoneType type = phoneTypeRepository.getById(idTypePhone);
 

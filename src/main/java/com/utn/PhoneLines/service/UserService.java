@@ -27,7 +27,7 @@ public class UserService {
 //ok
 
     public User getById(Integer idUser) throws UserNotExistsException {
-       // return userRepository.findById(idUser).orElseThrow(UserNotExistsException::new);
+
         User user = this.userRepository.getById(idUser);
 
         return Optional.ofNullable(user).orElseThrow(() -> new UserNotExistsException());
@@ -59,21 +59,7 @@ public class UserService {
             throw new ValidationException("username and password must have a value");
         }
     }
-/*
-    public List<User> getAll(String name) {
-        if(isNull(name))
-        {
-            return userRepository.findAll();
-        }
-        return  userRepository.findByName();
-    }
-    */
 
-/*
-    public User add(User user) {
-        return this.userRepository.save(user);
-    }
-*/
 
 
 }

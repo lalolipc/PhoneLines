@@ -26,8 +26,6 @@ public class Call {
     private Integer idCall;
 
 
-//cuando consultamos una tabla tenga estado de la otra
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_origin_phone")
     private Phone originPhone;

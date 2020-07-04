@@ -5,11 +5,12 @@ import com.utn.PhoneLines.model.State;
 import com.utn.PhoneLines.service.RateService;
 import com.utn.PhoneLines.service.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/state")
 public class StateController {
 

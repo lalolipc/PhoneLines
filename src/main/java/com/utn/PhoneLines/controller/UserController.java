@@ -7,14 +7,14 @@ import com.utn.PhoneLines.model.dto.UpdateUserDto;
 import com.utn.PhoneLines.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.xml.bind.ValidationException;
 import java.net.URI;
 import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
@@ -39,23 +39,6 @@ public class UserController {
         return ResponseEntity.ok(this.userService.update( idUser , user));
 
     }
-/*
-    public List<User> getAll(@RequestParam(required = false)String name) {
-        return userService.getAll(name);
-    }*/
-/*
-    public ResponseEntity addUser(@RequestBody final User user) {
-        return ResponseEntity.created(getLocation(this.userService.add(user))).build();
-    }*/
 
-    //ok powerMock
-    /*
-    private URI getLocation(User user) {
-        return ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}/")
-                .buildAndExpand(user.getIdUser())
-                .toUri();
-    }*/
 
 }

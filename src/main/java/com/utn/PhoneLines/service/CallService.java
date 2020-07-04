@@ -9,6 +9,7 @@ import com.utn.PhoneLines.projection.CallClientOffice;
 import com.utn.PhoneLines.projection.CallsClient;
 import com.utn.PhoneLines.projection.CallsClientTop;
 import com.utn.PhoneLines.repository.CallRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -20,7 +21,7 @@ public class CallService {
 
     private CallRepository callRepository;
     private PhoneService phoneService;
-
+    @Autowired
     public CallService(CallRepository callRepository, PhoneService phoneService) {
         this.callRepository = callRepository;
         this.phoneService = phoneService;
